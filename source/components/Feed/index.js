@@ -3,6 +3,7 @@ import { FlatList } from "react-native";
 import { API, graphqlOperation } from "aws-amplify";
 import Post from "../Post";
 import Stories from "../ListStories";
+import { ScrollView } from "react-native";
 // import { listPosts } from "../../graphql/queries";
 
 const Feed = () => {
@@ -81,6 +82,7 @@ const Feed = () => {
 
   return (
     // <View>{console.log(posts)}</View>
+
     <FlatList
       data={posts}
       renderItem={({ item }) => <Post post={item} />}
