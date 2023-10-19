@@ -6,19 +6,35 @@ const DiscoveryScreen = () => {
   return (
     <View style={[styles.container, { backgroundColor: "white" }]}>
       <View style={styles.horizontalContainer}>
-        {/* //     <AntDesign
-    //       style={{ marginLeft: "30px" }}
-    //       name="search1"
-    //       size={20}
-    //       color="black"
-    //     /> */}
+        <AntDesign
+          style={styles.iconInputLeft}
+          name="search1"
+          size={20}
+          color="gray"
+        />
 
-        <TextInput style={styles.TextInput} placeholder="Tìm kiếm"></TextInput>
+        <TextInput
+          style={[styles.TextInput, { flex: 1 }]}
+          placeholder="Tìm kiếm"
+        ></TextInput>
       </View>
       <PostsProfile />
     </View>
   );
 };
+
+<AntDesign
+  style={{
+    marginRight: 10,
+    alignContent: "center",
+    justifyContent: "center",
+    backgroundColor: "#eee",
+    height: 24,
+  }}
+  name="search1"
+  size={24}
+  color="black"
+/>;
 
 export default DiscoveryScreen;
 const styles = StyleSheet.create({
@@ -31,25 +47,29 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // flexDirection: "column",
     backgroundColor: "#fff",
     alignContent: "center",
 
-    // justifyContent: "flex-start",
     alignItems: "center",
   },
   TextInput: {
-    width: "90%",
-    // alignContent: "center",
-    // borderColor: "gray",
-    borderRadius: 5,
-    marginBottom: 20,
+    borderTopRightRadius: 8,
+
+    borderBottomRightRadius: 8,
     backgroundColor: "#eee",
     height: 36,
   },
+  iconInputLeft: {
+    padding: 6,
+    height: 36,
+
+    backgroundColor: "#eee",
+    alignContent: "center",
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+  },
   horizontalContainer: {
     flexDirection: "row",
-    justifyContent: "space-around",
     alignItems: "center",
     padding: 10,
   },
