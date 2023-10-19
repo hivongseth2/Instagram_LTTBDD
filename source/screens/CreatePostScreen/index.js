@@ -1,3 +1,5 @@
+import { useRef, useState, useEffect } from "react";
+
 import {
   StyleSheet,
   View,
@@ -6,33 +8,58 @@ import {
   Button,
   Image,
 } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
-import { GLView } from "expo-gl";
-
-import { Camera, CameraType } from "expo-camera";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { Camera, CameraType, FaceDetectionResult } from "expo-camera";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
-import { useRef, useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
+
+import * as FaceDetector from "expo-face-detector";
 const CameraScreen = () => {
-  const isFocused = useIsFocused();
+  const isFocused = useIsFocused(); // 1 phien chi 1 apply 1 cam, dung useFocus xu ly
+  const [hasCameraPermission, setHasCameraPermission] = useState(); // quyen cam
+  const [type, setType] = useState(Camera.Constants.Type.front); // camera truoc saau
+  const [hasMediaLibPermission, setHasMediaLibPermission] = useState(); // quyen thu vien
+  const [photo, setPhoto] = useState();
+  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+  const [filter, setFilter] = useState(false);
 
   let cameraRef = useRef();
 
-  //Phan filter
-  const glViewRef = useRef(null);
-  const [filter, setFilter] = useState("none"); // Bộ lọc mặc định
+  const [faceDetedted, setFaceDetected] = useState(false); // nhan dien khuon mat
+  const facevalues = useSharedValue({
+    width: 0,
+    height: 0,
+    x: 0,
+    y: 0,
+  });
 
-  const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [hasMediaLibPermission, setHasMediaLibPermission] = useState();
-  const [photo, setPhoto] = useState();
-  const [type, setType] = useState(CameraType.back);
-  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+  // SUA FILTER O DAY
 
+  const animatedStyle = useAnimatedStyle(() => ({
+    position: "absolute",
+    zIndex: 1,
+    width: facevalues.value.width,
+    height: facevalues.value.height,
+    transform: [
+      { translateX: facevalues.value.x },
+      { translateY: facevalues.value.y },
+    ],
+    borderColor: "blue",
+    borderWidth: 10,
+  }));
+
+  /// XIN CAP QUYEN
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
@@ -52,18 +79,12 @@ const CameraScreen = () => {
     );
   }
 
-  // ========chuyen camera
+  // ==== CAC THAO TAC
   function toggleCameraType() {
     setType((current) =>
       current === CameraType.back ? CameraType.front : CameraType.back
     );
   }
-  // =
-  const handleMountError = (error) => {
-    console.log("Camera Mount Error:", error);
-    // Xử lý lỗi tại đây (ví dụ: thông báo cho người dùng về lỗi)
-  };
-
   // ======flash
   const toggleFlash = () => {
     setFlash((current) =>
@@ -73,9 +94,7 @@ const CameraScreen = () => {
     );
   };
 
-  //===========FILTER
-
-  // =========
+  // TAKE PIC
 
   const takePic = async () => {
     let options = {
@@ -119,16 +138,53 @@ const CameraScreen = () => {
       </SafeAreaView>
     );
   }
+  // filter
+
+  const faceDetectionOptions = {
+    detectLandmarks: FaceDetector.FaceDetectorLandmarks.all,
+    minDetectionInterval: 100,
+    mode: FaceDetector.FaceDetectorMode.fast,
+    runClassifications: FaceDetector.FaceDetectorClassifications.all,
+    tracking: true,
+  };
+
+  // xu ly nhan dien khuon mat
+  function handleFacesDetected({ faces }) {
+    const face = faces[0];
+    if (face) {
+      const { size, origin } = face.bounds;
+      facevalues.value = {
+        width: size.width,
+        height: size.height,
+        x: origin.x,
+        y: origin.y,
+      };
+      setFaceDetected(true);
+    } else {
+      setFaceDetected(false);
+    }
+  }
+
+  // =========
 
   return (
     <View style={styles.container}>
+      {faceDetedted && filter && <Animated.View style={animatedStyle} />}
+
       {isFocused && (
         <Camera
           style={styles.container}
           ref={cameraRef}
           type={type}
           flashMode={flash}
-          onMountError={handleMountError}
+          autoFocus={true}
+          // onMountError={handleMountError}
+          // // focusDepth={0.5}
+
+          isImageMirror={false}
+          ratio={"16:9"}
+          onFacesDetected={handleFacesDetected}
+          faceDetectorSettings={{ faceDetectionOptions }}
         >
           <View style={styles.hContainer}>
             <Feather name="x" size={30} color="white" />
@@ -163,10 +219,28 @@ const CameraScreen = () => {
               style={{ marginVertical: 10 }}
             />
           </View>
-
           <View style={[styles.hContainer, { justifyContent: "center" }]}>
             <TouchableOpacity onPress={takePic} style={styles.buttonContainer}>
               <Entypo name="circle" size={70} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setFilter(!filter);
+              }}
+              style={[
+                styles.buttonContainer,
+                {
+                  // borderColor: filter ? "white" : "none",
+                  backgroundColor: filter ? "white" : "#ccc",
+                  borderWidth: filter ? 5 : 0,
+                },
+              ]}
+            >
+              <MaterialIcons
+                name="filter-center-focus"
+                size={50}
+                color={filter ? "black" : "gray"}
+              />
             </TouchableOpacity>
           </View>
         </Camera>
