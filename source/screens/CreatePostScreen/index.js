@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   Button,
   Image,
+  ImageBackground,
+  Pressable,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -120,25 +122,32 @@ const CameraScreen = () => {
     };
     return (
       <SafeAreaView style={styles.container}>
-        <Image
-          style={styles.preview}
+        <ImageBackground
+          style={[styles.preview, { justifyContent: "space-between" }]}
           source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        />
-        <Button title="Share" onPress={sharePic}></Button>
-        {hasMediaLibPermission ? (
-          <Button title="Save" onPress={savePhoto} />
-        ) : undefined}
+        >
+          <View style={styles.hContainer}>
+            <Pressable
+              onPress={() => {
+                setPhoto(undefined);
+              }}
+            >
+              <Ionicons name="chevron-back-sharp" size={24} color="black" />
+            </Pressable>
 
-        <Button
-          title="Discard"
-          onPress={() => {
-            setPhoto(undefined);
-          }}
-        ></Button>
+            <View>
+              {hasMediaLibPermission && (
+                <Pressable onPress={savePhoto}>
+                  <MaterialIcons name="save-alt" size={24} color="black" />
+                </Pressable>
+              )}
+            </View>
+          </View>
+          <Button title="Share" onPress={sharePic} />
+        </ImageBackground>
       </SafeAreaView>
     );
   }
-  // filter
 
   const faceDetectionOptions = {
     detectLandmarks: FaceDetector.FaceDetectorLandmarks.all,
@@ -178,9 +187,6 @@ const CameraScreen = () => {
           type={type}
           flashMode={flash}
           autoFocus={true}
-          // onMountError={handleMountError}
-          // // focusDepth={0.5}
-
           isImageMirror={false}
           ratio={"16:9"}
           onFacesDetected={handleFacesDetected}
@@ -189,7 +195,7 @@ const CameraScreen = () => {
           <View style={styles.hContainer}>
             <Feather name="x" size={30} color="white" />
             <Ionicons
-              name={flash ? "ios-flash-off" : "ios-flash"}
+              name={!flash ? "ios-flash-off" : "ios-flash"}
               size={30}
               color="white"
               onPress={toggleFlash}
