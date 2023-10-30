@@ -5,17 +5,23 @@
   "build": {
     "development": {
       "distribution": "internal",
+      "developmentClient": true
+      // "android": {
+      //   "gradleCommand": ":app:assembleDebug"
+      // },
+      // "ios": {
+      //   "buildConfiguration": "Debug"
+      // }
+    },
+    
+    "preview": {
       "android": {
-        "gradleCommand": ":app:assembleDebug"
-      },
-      "ios": {
-        "buildConfiguration": "Debug"
+        "buildType": "apk"
       }
     },
-    "preview": {
-      "distribution": "internal"
-    },
-    "production": {}
+    "production": {
+      
+    }
   },
   "submit": {
     "production": {}

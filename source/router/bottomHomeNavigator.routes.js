@@ -9,10 +9,10 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import HomeStackScreen from "./home.routes";
 import DiscoveryScreen from "../screens/DiscoveryScreen";
-import CreatePostScreen from "../screens/CreatePostScreen";
+import CameraScreen from "../screens/CreatePostScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import Post from "../components/Post";
+// import
 
 const Tab = createBottomTabNavigator();
 
@@ -60,11 +60,8 @@ const BottomHomeNavigator = () => (
       component={DiscoveryScreen}
       options={{ title: "" }}
     />
-    <Tab.Screen
-      name="Post"
-      component={CreatePostScreen}
-      options={{ title: "" }}
-    />
+    <Tab.Screen name="Post" component={CameraScreen} options={{ title: "" }} />
+
     <Tab.Screen
       name="Notifications"
       component={NotificationsScreen}

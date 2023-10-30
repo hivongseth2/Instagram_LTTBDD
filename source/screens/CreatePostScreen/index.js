@@ -10,6 +10,8 @@ import {
   ImageBackground,
   Pressable,
 } from "react-native";
+import { manipulateAsync, FlipType, SaveFormat } from "expo-image-manipulator";
+
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -27,6 +29,7 @@ import * as MediaLibrary from "expo-media-library";
 import { TouchableOpacity } from "react-native";
 
 import * as FaceDetector from "expo-face-detector";
+import PhotoPreview from "../EditImageScreen";
 const CameraScreen = () => {
   const isFocused = useIsFocused(); // 1 phien chi 1 apply 1 cam, dung useFocus xu ly
   const [hasCameraPermission, setHasCameraPermission] = useState(); // quyen cam
@@ -97,6 +100,17 @@ const CameraScreen = () => {
   };
 
   // TAKE PIC
+  const _rotate90andFlip = async (newPhoto) => {
+    if (type === "back") {
+      setPhoto(newPhoto);
+    } else {
+      const manipResult = await manipulateAsync(
+        newPhoto.localUri || newPhoto.uri,
+        [{ flip: FlipType.Horizontal }]
+      );
+      setPhoto(manipResult);
+    }
+  };
 
   const takePic = async () => {
     let options = {
@@ -105,8 +119,8 @@ const CameraScreen = () => {
       exif: false,
     };
     let newPhoto = await cameraRef.current.takePictureAsync(options);
-
-    setPhoto(newPhoto);
+    _rotate90andFlip(newPhoto);
+    // setPhoto(newPhoto);
   };
 
   if (photo) {
@@ -121,31 +135,13 @@ const CameraScreen = () => {
       });
     };
     return (
-      <SafeAreaView style={styles.container}>
-        <ImageBackground
-          style={[styles.preview, { justifyContent: "space-between" }]}
-          source={{ uri: "data:image/jpg;base64," + photo.base64 }}
-        >
-          <View style={styles.hContainer}>
-            <Pressable
-              onPress={() => {
-                setPhoto(undefined);
-              }}
-            >
-              <Ionicons name="chevron-back-sharp" size={24} color="black" />
-            </Pressable>
-
-            <View>
-              {hasMediaLibPermission && (
-                <Pressable onPress={savePhoto}>
-                  <MaterialIcons name="save-alt" size={24} color="black" />
-                </Pressable>
-              )}
-            </View>
-          </View>
-          <Button title="Share" onPress={sharePic} />
-        </ImageBackground>
-      </SafeAreaView>
+      <PhotoPreview
+        photo={photo}
+        hasMediaLibPermission={hasMediaLibPermission}
+        setPhoto={setPhoto}
+        sharePic={sharePic}
+        savePhoto={savePhoto}
+      />
     );
   }
 
@@ -187,7 +183,7 @@ const CameraScreen = () => {
           type={type}
           flashMode={flash}
           autoFocus={true}
-          isImageMirror={false}
+          isImageMirror={true}
           ratio={"16:9"}
           onFacesDetected={handleFacesDetected}
           faceDetectorSettings={{ faceDetectionOptions }}
