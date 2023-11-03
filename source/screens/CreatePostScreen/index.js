@@ -11,9 +11,7 @@ import {
   Pressable,
 } from "react-native";
 import { manipulateAsync, FlipType, SaveFormat } from "expo-image-manipulator";
-
 import { MaterialIcons } from "@expo/vector-icons";
-
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -27,6 +25,8 @@ import { Camera, CameraType, FaceDetectionResult } from "expo-camera";
 import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import { TouchableOpacity } from "react-native";
+// import { ViewShot } from "react-native-view-shot";
+import ViewShot from "react-native-view-shot";
 
 import * as FaceDetector from "expo-face-detector";
 import PhotoPreview from "../EditImageScreen";
@@ -36,10 +36,13 @@ const CameraScreen = () => {
   const [type, setType] = useState(Camera.Constants.Type.front); // camera truoc saau
   const [hasMediaLibPermission, setHasMediaLibPermission] = useState(); // quyen thu vien
   const [photo, setPhoto] = useState();
+  const [photoFilter, setPhotoFilter] = useState();
+
   const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
   const [filter, setFilter] = useState(false);
 
   let cameraRef = useRef();
+  let viewShotRef = useRef();
 
   const [faceDetedted, setFaceDetected] = useState(false); // nhan dien khuon mat
   const facevalues = useSharedValue({
@@ -60,8 +63,6 @@ const CameraScreen = () => {
       { translateX: facevalues.value.x },
       { translateY: facevalues.value.y },
     ],
-    borderColor: "blue",
-    borderWidth: 10,
   }));
 
   /// XIN CAP QUYEN
@@ -100,7 +101,7 @@ const CameraScreen = () => {
   };
 
   // TAKE PIC
-  const _rotate90andFlip = async (newPhoto) => {
+  const _rotate90andFlip = async (newPhoto, photoFilter) => {
     if (type === "back") {
       setPhoto(newPhoto);
     } else {
@@ -109,18 +110,40 @@ const CameraScreen = () => {
         [{ flip: FlipType.Horizontal }]
       );
       setPhoto(manipResult);
+
+      setPhotoFilter(photoFilter);
     }
   };
 
   const takePic = async () => {
     let options = {
       quality: 1,
-      base64: true,
+      base64: false,
       exif: false,
     };
-    let newPhoto = await cameraRef.current.takePictureAsync(options);
-    _rotate90andFlip(newPhoto);
+    // captureScreen({
+    //   format: "jpg",
+    //   quality: 0.8,
+    // }).then(
+    //   (uri) => setPhoto({ uri: uri }),
+    //   (error) => console.error("Oops, snapshot failed", error)
+    // );
+    let photoCamera = await cameraRef.current.takePictureAsync(options);
+    // let newPhoto = await viewShotRef.current.capture();
+    // console.log(newPhoto);
+    // setPhoto({ uri: newPhoto });
+    // _rotate90andFlip(newPhoto);
     // setPhoto(newPhoto);
+    try {
+      const photoFilter = await viewShotRef.current.capture();
+      _rotate90andFlip(photoCamera, photoFilter);
+    } catch (err) {
+      const photoFilter = null;
+      _rotate90andFlip(photoCamera, photoFilter);
+    }
+    // console.log(photoCamera);
+    // setPhoto({ uri: photoCamera.uri });
+    // setPhotoFilter({ uri: photoFilter });
   };
 
   if (photo) {
@@ -140,6 +163,7 @@ const CameraScreen = () => {
         hasMediaLibPermission={hasMediaLibPermission}
         setPhoto={setPhoto}
         sharePic={sharePic}
+        photoFilter={photoFilter}
         savePhoto={savePhoto}
       />
     );
@@ -174,78 +198,115 @@ const CameraScreen = () => {
 
   return (
     <View style={styles.container}>
-      {faceDetedted && filter && <Animated.View style={animatedStyle} />}
+      {faceDetedted && filter && (
+        <ViewShot
+          ref={viewShotRef}
+          style={{
+            width: "100%",
+            height: "90%",
+            position: "absolute",
+            zIndex: 2,
+          }}
+        >
+          <Animated.View style={animatedStyle}>
+            <Image
+              source={require("../../../assets/gai.png")}
+              style={{
+                position: "relative",
+                width: 350,
+                height: 350,
+                top: -30,
+                left: 40,
+              }}
+            ></Image>
+          </Animated.View>
+        </ViewShot>
+      )}
 
       {isFocused && (
-        <Camera
-          style={styles.container}
-          ref={cameraRef}
-          type={type}
-          flashMode={flash}
-          autoFocus={true}
-          isImageMirror={true}
-          ratio={"16:9"}
-          onFacesDetected={handleFacesDetected}
-          faceDetectorSettings={{ faceDetectionOptions }}
-        >
-          <View style={styles.hContainer}>
-            <Feather name="x" size={30} color="white" />
-            <Ionicons
-              name={!flash ? "ios-flash-off" : "ios-flash"}
-              size={30}
-              color="white"
-              onPress={toggleFlash}
-            />
-            <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
-              <Ionicons name="camera-reverse-outline" size={30} color="white" />
-            </TouchableOpacity>
-            <SimpleLineIcons name="settings" size={30} color="white" />
-          </View>
-          <View style={styles.leftContainer}>
-            <Ionicons
-              name="text"
-              size={30}
-              color="white"
-              style={{ marginVertical: 10 }}
-            />
-            <Entypo
-              name="infinity"
-              size={30}
-              color="white"
-              style={{ marginVertical: 10 }}
-            />
-            <Ionicons
-              name="md-grid-outline"
-              size={30}
-              color="white"
-              style={{ marginVertical: 10 }}
-            />
-          </View>
-          <View style={[styles.hContainer, { justifyContent: "center" }]}>
-            <TouchableOpacity onPress={takePic} style={styles.buttonContainer}>
-              <Entypo name="circle" size={70} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setFilter(!filter);
-              }}
-              style={[
-                styles.buttonContainer,
-                {
-                  // borderColor: filter ? "white" : "none",
-                  backgroundColor: filter ? "white" : "#ccc",
-                  borderWidth: filter ? 5 : 0,
-                },
-              ]}
-            >
-              <MaterialIcons
-                name="filter-center-focus"
-                size={50}
-                color={filter ? "black" : "gray"}
+        <ViewShot ref={viewShotRef} style={styles.container}>
+          {/* Wrap the entire screen */}
+          <Camera
+            style={styles.container}
+            ref={cameraRef}
+            type={type}
+            flashMode={flash}
+            collapsable={false}
+            autoFocus={true}
+            isImageMirror={true}
+            ratio={"16:9"}
+            onFacesDetected={handleFacesDetected}
+            faceDetectorSettings={{ faceDetectionOptions }}
+          >
+            <View style={styles.hContainer}>
+              <Feather name="x" size={30} color="white" />
+              <Ionicons
+                name={!flash ? "ios-flash-off" : "ios-flash"}
+                size={30}
+                color="white"
+                onPress={toggleFlash}
               />
-            </TouchableOpacity>
-          </View>
-        </Camera>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={toggleCameraType}
+              >
+                <Ionicons
+                  name="camera-reverse-outline"
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
+              <SimpleLineIcons name="settings" size={30} color="white" />
+            </View>
+            <View style={styles.leftContainer}>
+              <Ionicons
+                name="text"
+                size={30}
+                color="white"
+                style={{ marginVertical: 10 }}
+              />
+              <Entypo
+                name="infinity"
+                size={30}
+                color="white"
+                style={{ marginVertical: 10 }}
+              />
+              <Ionicons
+                name="md-grid-outline"
+                size={30}
+                color="white"
+                style={{ marginVertical: 10 }}
+              />
+            </View>
+            <View style={[styles.hContainer, { justifyContent: "center" }]}>
+              <TouchableOpacity
+                onPress={takePic}
+                style={[styles.buttonContainer]}
+              >
+                <Entypo name="circle" size={70} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setFilter(!filter);
+                }}
+                style={[
+                  styles.buttonContainer,
+                  {
+                    // borderColor: filter ? "white" : "none",
+                    backgroundColor: filter ? "white" : "#ccc",
+                    borderWidth: filter ? 5 : 0,
+                  },
+                ]}
+              >
+                <MaterialIcons
+                  name="filter-center-focus"
+                  size={50}
+                  color={filter ? "black" : "gray"}
+                />
+              </TouchableOpacity>
+            </View>
+          </Camera>
+        </ViewShot>
       )}
     </View>
   );

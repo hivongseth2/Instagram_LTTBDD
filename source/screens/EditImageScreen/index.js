@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GLView } from "expo-gl";
 import { Surface } from "gl-react-expo";
 import { Shaders, Node, GLSL } from "gl-react";
@@ -6,6 +6,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import ViewShot from "react-native-view-shot";
+
 import {
   View,
   Pressable,
@@ -14,6 +16,7 @@ import {
   SafeAreaView,
   Image,
   FlatList,
+  ImageBackground,
   Text,
 } from "react-native";
 
@@ -111,23 +114,43 @@ const PhotoPreview = ({
   hasMediaLibPermission,
   setPhoto,
   sharePic,
+  photoFilter,
   savePhoto,
 }) => {
-  const glViewRef = useRef(null);
+  let viewShotRef = useRef();
+  const [image, setImage] = useState(null);
   const [filter, setFilter] = useState(null);
-
+  useEffect(() => {
+    // Gọi capture ngay sau khi nội dung đã render xong
+    if (viewShotRef.current) {
+      setTimeout(() => {
+        viewShotRef.current.capture().then((uri) => {
+          // Ảnh đã được chụp được lưu ở uri
+          setImage({
+            base64: null,
+            height: 1920,
+            uri: uri,
+            width: 1080,
+          });
+        });
+      }, 1000);
+    }
+  }, [filter]); // Khi filter thay đổi, chụp lại ảnh
   const renderImageWithFilter = (selectedFilter) => {
     switch (selectedFilter) {
       case 1: // Grayscale
         return (
           <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            <Node shader={shaders.grayscale} uniforms={{ t: photo }} />
+            {console.log("pick", image)}
+            <Node shader={shaders.grayscale} uniforms={{ t: image }} />
           </Surface>
         );
       case 2: // Sepia
         return (
           <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            <Node shader={shaders.sepia} uniforms={{ t: photo }} />
+            {console.log("photo", image)}
+
+            <Node shader={shaders.sepia} uniforms={{ t: image }} />
           </Surface>
         );
       case 3: // Brightness
@@ -135,7 +158,7 @@ const PhotoPreview = ({
           <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
             <Node
               shader={shaders.brightness}
-              uniforms={{ t: photo, brightness: 0.2 }}
+              uniforms={{ t: image, brightness: 0.2 }}
             />
           </Surface>
         );
@@ -144,7 +167,7 @@ const PhotoPreview = ({
           <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
             <Node
               shader={shaders.saturation}
-              uniforms={{ t: photo, saturation: 0.3 }}
+              uniforms={{ t: image, saturation: 0.3 }}
             />
           </Surface>
         );
@@ -153,7 +176,7 @@ const PhotoPreview = ({
           <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
             <Node
               shader={shaders.contrast}
-              uniforms={{ t: photo, contrast: 0.3 }}
+              uniforms={{ t: image, contrast: 0.3 }}
             />
           </Surface>
         );
@@ -163,19 +186,38 @@ const PhotoPreview = ({
           <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
             <Node
               shader={shaders.hueRotation}
-              uniforms={{ t: photo, hue: 10 }}
+              uniforms={{ t: image, hue: 10 }}
             />
           </Surface>
         );
       default:
         return (
-          <View style={[styles.preview, { height: "100%", width: "100%" }]}>
-            {console.log(photo)}
-            <Image
+          <ViewShot
+            style={[styles.preview, { height: "100%", width: "100%" }]}
+            options={{
+              format: "jpg",
+              quality: 0.9,
+            }}
+            ref={viewShotRef}
+          >
+            <ImageBackground
+              collapsable={false}
               source={{ uri: photo.uri }}
               style={[{ height: "100%", width: "100%" }]}
-            />
-          </View>
+            >
+              <Image
+                source={{ uri: photoFilter }}
+                style={[{ height: "100%", width: "100%" }]}
+              />
+            </ImageBackground>
+          </ViewShot>
+
+          // <ViewShot style={[styles.preview, { height: "100%", width: "100%" }]}>
+          //   <Image
+          //     source={{ uri: image }}
+          //     style={[{ height: "100%", width: "100%" }]}
+          //   />
+          // </ViewShot>
         );
     }
   };
