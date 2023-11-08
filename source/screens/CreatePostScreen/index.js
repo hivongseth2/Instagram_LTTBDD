@@ -121,19 +121,9 @@ const CameraScreen = () => {
       base64: false,
       exif: false,
     };
-    // captureScreen({
-    //   format: "jpg",
-    //   quality: 0.8,
-    // }).then(
-    //   (uri) => setPhoto({ uri: uri }),
-    //   (error) => console.error("Oops, snapshot failed", error)
-    // );
+
     let photoCamera = await cameraRef.current.takePictureAsync(options);
-    // let newPhoto = await viewShotRef.current.capture();
-    // console.log(newPhoto);
-    // setPhoto({ uri: newPhoto });
-    // _rotate90andFlip(newPhoto);
-    // setPhoto(newPhoto);
+
     try {
       const photoFilter = await viewShotRef.current.capture();
       _rotate90andFlip(photoCamera, photoFilter);
@@ -141,9 +131,6 @@ const CameraScreen = () => {
       const photoFilter = null;
       _rotate90andFlip(photoCamera, photoFilter);
     }
-    // console.log(photoCamera);
-    // setPhoto({ uri: photoCamera.uri });
-    // setPhotoFilter({ uri: photoFilter });
   };
 
   if (photo) {
@@ -152,8 +139,8 @@ const CameraScreen = () => {
         setPhoto(undefined);
       });
     };
-    let savePhoto = () => {
-      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+    let savePhoto = (image) => {
+      MediaLibrary.saveToLibraryAsync(image.uri).then(() => {
         setPhoto(undefined);
       });
     };
