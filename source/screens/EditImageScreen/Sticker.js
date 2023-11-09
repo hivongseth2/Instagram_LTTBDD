@@ -1,8 +1,20 @@
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import {
+  Canvas,
+  Circle,
+  Group,
+  Path,
+  vec,
+  LinearGradient,
+} from "@shopify/react-native-skia";
+import HackSticker from "./Stickers/HackSticker";
+import HelloSticker from "./Stickers/HelloSticker";
 
 export default function Sticker({ closeSticker }) {
-  console.log(closeSticker);
+  const width = 200;
+  const height = 200;
+  const r = width * 0.33;
   return (
     <View style={styles.container}>
       <View
@@ -20,8 +32,8 @@ export default function Sticker({ closeSticker }) {
           <AntDesign name="closecircleo" size={30} color="white" />
         </TouchableOpacity>
       </View>
-
-      <Text>aaaaaaaaaaa</Text>
+      <HackSticker></HackSticker>
+      <HelloSticker></HelloSticker>
     </View>
   );
 }
