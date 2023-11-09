@@ -1,21 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  Button,
-  Image,
-  ImageBackground,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, Text, Modal, Image, Pressable } from "react-native";
 import { manipulateAsync, FlipType, SaveFormat } from "expo-image-manipulator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import Animated, {
   useSharedValue,
@@ -27,9 +17,11 @@ import * as MediaLibrary from "expo-media-library";
 import { TouchableOpacity } from "react-native";
 // import { ViewShot } from "react-native-view-shot";
 import ViewShot from "react-native-view-shot";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import * as FaceDetector from "expo-face-detector";
 import PhotoPreview from "../EditImageScreen";
+import Sticker from "../EditImageScreen/Sticker";
 const CameraScreen = () => {
   const isFocused = useIsFocused(); // 1 phien chi 1 apply 1 cam, dung useFocus xu ly
   const [hasCameraPermission, setHasCameraPermission] = useState(); // quyen cam
@@ -51,6 +43,13 @@ const CameraScreen = () => {
     x: 0,
     y: 0,
   });
+
+  // open stickerModal
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   // SUA FILTER O DAY
 
@@ -243,7 +242,13 @@ const CameraScreen = () => {
                   color="white"
                 />
               </TouchableOpacity>
-              <SimpleLineIcons name="settings" size={30} color="white" />
+              <Pressable onPress={toggleDrawer}>
+                <MaterialCommunityIcons
+                  name="sticker-emoji"
+                  size={30}
+                  color="white"
+                />
+              </Pressable>
             </View>
             <View style={styles.leftContainer}>
               <Ionicons
@@ -279,7 +284,6 @@ const CameraScreen = () => {
                 style={[
                   styles.buttonContainer,
                   {
-                    // borderColor: filter ? "white" : "none",
                     backgroundColor: filter ? "white" : "#ccc",
                     borderWidth: filter ? 5 : 0,
                   },
@@ -295,6 +299,17 @@ const CameraScreen = () => {
           </Camera>
         </ViewShot>
       )}
+
+      <Modal
+        visible={isDrawerOpen}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => {
+          setIsDrawerOpen(!isDrawerOpen);
+        }}
+      >
+        <Sticker closeSticker={() => toggleDrawer()}></Sticker>
+      </Modal>
     </View>
   );
 };
