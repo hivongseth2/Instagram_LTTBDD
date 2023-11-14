@@ -37,7 +37,7 @@ import Router from "./source/router";
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <StatusBar barStyle="dark-content" /> */}
+      <StatusBar barStyle="dark-content" />
       <Router />
     </NavigationContainer>
   );

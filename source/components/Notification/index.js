@@ -17,11 +17,11 @@ export default function ItemNoti() {
       type: "activity",
       name: "vtmthu12",
       image:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/387808957_995312745103531_8561777563808331732_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=FtuE3y2Cx2wAX_gX3ne&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfB8p4roJHtOcsA7tctznMyq1RHqO-QOXO_DEFu91q2UhQ&oe=65308DAD",
+        "https://giadinh.mediacdn.vn/296230595582509056/2022/2/17/27212817110061775266623491256080737665900375n-16450863187391857196552.jpg",
       time: "2 giờ",
       content: "đã thích tin của bạn",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/297257252_2000354983482748_4171238219446568382_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UcwTrmREPb4AX8k-fwF&_nc_oc=AQkbhvqaNpIj_CIemgpqaNlkMzHxP7nQjNp5dPMoorA4E2IZvV3Ax2vCyxj-g-dL3_n-Px1vR3lVChzley4njgrm&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfASrqhsuD9OeK5sG-iKP-OYZxzsRbonaXQDXhFx3cQvhg&oe=653122E0",
+        "https://i.pinimg.com/236x/6f/aa/83/6faa83552b999617b2c7cd9ec027c31d.jpg",
     },
     {
       id: "2",
@@ -29,11 +29,11 @@ export default function ItemNoti() {
 
       name: "dddddddddd0301",
       image:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/291674145_3270499209859986_2357170128413625034_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=uZE1GowoE5wAX_zNeQu&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfAuIsM5weM70dOb-mr2VrgzthHrX5XCCTAgIEpkCsdDhg&oe=65309E53",
+        "https://leplateau.edu.vn/wp-content/uploads/2023/10/hinh-anh-cute-1.jpg",
       time: "6 ngày",
       content: "đã thích tin của bạn",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://cdn.tgdd.vn/Files/2016/02/25/792452/chup-anh-hoang-hon-bang-smartphone_800x450.jpg",
     },
     {
       id: "3",
@@ -41,18 +41,18 @@ export default function ItemNoti() {
 
       name: "512mhh",
       image:
-        "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-1/351305043_1300227687540828_6320001758953554335_n.jpg?stp=dst-jpg_p200x200&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=A7FWs3mJzgsAX-Iwu_x&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfClZwKpwQuKl8ejJxbw1hBKE5wMVM8V53UwNoG9Ai4z6w&oe=65312966",
+        "https://xwatch.vn/upload_images/images/2023/03/29/anh-chill-bau-troi.jpg",
       time: "6 ngày",
       content: "đã bình luận tin của bạn.",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://cdn.tgdd.vn/Files/2016/02/25/792452/chup-anh-hoang-hon-bang-smartphone_800x450.jpg",
     },
     {
       id: "4",
       type: "connect",
       name: "thanhle_67",
       image:
-        "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/362678161_1349102312310756_7574969850598876327_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_ohc=R2YRl_LhTfEAX-BkL11&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfBORGRiTLeQzlIsLQlV3KTawH5BqZyu8JaFkbubEDlEIA&oe=65311B0B",
+        "https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg",
       time: "4 tuần",
     },
     {
@@ -60,8 +60,8 @@ export default function ItemNoti() {
       type: "noti",
       name: "chuyencuaemm_, dan.doc.sach và 4 người sáng tạo nội dung khác",
       image: [
-        "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/378020544_723928496445741_8276473315441075588_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=dgZn5rGylBcAX-QMmpQ&_nc_ht=scontent.fsgn2-6.fna&oh=00_AfAgDsva3I7ROPtSiZkHrtPhieIDda8ZW9SFb2OGRpkR8Q&oe=6530F1D5",
-        "https://scontent.fsgn2-9.fna.fbcdn.net/v/t39.30808-6/307574872_649874456805986_7575338197427319079_n.jpg?_nc_cat=1&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ePiORvGT0O4AX8vNjoG&_nc_ht=scontent.fsgn2-9.fna&oh=00_AfDZTp4KC25HG-j0R__4uhLAJ4UA5tGqxoEZAbyMzMdaLQ&oe=65316B8C",
+        "https://halotravel.vn/wp-content/uploads/2020/07/thach_trangg_101029297_573874646879779_1794923475739360981_n.jpg",
+        "https://baoninhbinh.org.vn/DATA/ARTICLES/2021/10/22/hinh-anh-me-trong-tho-duong-dai-ninh-binh-f5ffb.jpg",
       ],
       time: "5 tuần",
     },
@@ -71,11 +71,11 @@ export default function ItemNoti() {
 
       name: "512mhh",
       image:
-        "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-1/351305043_1300227687540828_6320001758953554335_n.jpg?stp=dst-jpg_p200x200&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=A7FWs3mJzgsAX-Iwu_x&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfClZwKpwQuKl8ejJxbw1hBKE5wMVM8V53UwNoG9Ai4z6w&oe=65312966",
+        "https://xwatch.vn/upload_images/images/2023/03/29/anh-chill-bau-troi.jpg",
       time: "6 tuần",
       content: "đã thích bình luận của bạn: anh có lừa em bao h chưa.",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
     },
     {
       id: "7",
@@ -83,11 +83,11 @@ export default function ItemNoti() {
 
       name: "512mhh",
       image:
-        "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-1/351305043_1300227687540828_6320001758953554335_n.jpg?stp=dst-jpg_p200x200&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=A7FWs3mJzgsAX-Iwu_x&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfClZwKpwQuKl8ejJxbw1hBKE5wMVM8V53UwNoG9Ai4z6w&oe=65312966",
+        "https://xwatch.vn/upload_images/images/2023/03/29/anh-chill-bau-troi.jpg",
       time: "6 tuần",
       content: "đã nhắc đến bạn trong bình luận: thiệt khum.",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
     },
     {
       id: "8",
@@ -95,11 +95,12 @@ export default function ItemNoti() {
 
       name: "512mhh",
       image:
-        "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-1/351305043_1300227687540828_6320001758953554335_n.jpg?stp=dst-jpg_p200x200&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=A7FWs3mJzgsAX-Iwu_x&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfClZwKpwQuKl8ejJxbw1hBKE5wMVM8V53UwNoG9Ai4z6w&oe=65312966",
+        "https://xwatch.vn/upload_images/images/2023/03/29/anh-chill-bau-troi.jpg",
+
       time: "6 tuần",
       content: "đã thích bình luận của bạn: Bé dth.",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
     },
     {
       id: "9",
@@ -107,11 +108,12 @@ export default function ItemNoti() {
 
       name: "dddddddddd0301",
       image:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/291674145_3270499209859986_2357170128413625034_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=uZE1GowoE5wAX_zNeQu&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfAuIsM5weM70dOb-mr2VrgzthHrX5XCCTAgIEpkCsdDhg&oe=65309E53",
+        "https://leplateau.edu.vn/wp-content/uploads/2023/10/hinh-anh-cute-1.jpg",
+
       time: "7 tuần",
       content: "đã nhắc đến bạn trong bình luận: thích hem",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
     },
     {
       id: "10",
@@ -119,11 +121,12 @@ export default function ItemNoti() {
 
       name: "dddddddddd0301",
       image:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/291674145_3270499209859986_2357170128413625034_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=uZE1GowoE5wAX_zNeQu&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfAuIsM5weM70dOb-mr2VrgzthHrX5XCCTAgIEpkCsdDhg&oe=65309E53",
+        "https://leplateau.edu.vn/wp-content/uploads/2023/10/hinh-anh-cute-1.jpg",
+
       time: "7 tuần",
       content: "đã thích bình luận của bạn: đẹp quá",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
     },
     {
       id: "11",
@@ -131,11 +134,12 @@ export default function ItemNoti() {
 
       name: "dddddddddd0301",
       image:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/291674145_3270499209859986_2357170128413625034_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=uZE1GowoE5wAX_zNeQu&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfAuIsM5weM70dOb-mr2VrgzthHrX5XCCTAgIEpkCsdDhg&oe=65309E53",
+        "https://leplateau.edu.vn/wp-content/uploads/2023/10/hinh-anh-cute-1.jpg",
+
       time: "7 tuần",
       content: "đã thích bình luận của bạn: đẹp quá",
       imagePost:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
     },
   ];
 

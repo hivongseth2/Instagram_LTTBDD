@@ -16,7 +16,7 @@ const ProfileScreen = () => {
     followers: 54,
     following: 114,
     avatar:
-      "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/372809666_2284177928433784_4435342299495343359_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=65Qk583wG8QAX-V9TiI&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDoRiR6QTVrae_PemrvrXQMzx6_9PfX2nhu8gOOH3I-Yw&oe=65303BE9",
+      "https://statusneo.com/wp-content/uploads/2023/02/MicrosoftTeams-image551ad57e01403f080a9df51975ac40b6efba82553c323a742b42b1c71c1e45f1.jpg",
   };
   const handleEditProfile = () => {};
 
@@ -35,7 +35,7 @@ const ProfileScreen = () => {
           story={{
             id: 2,
             image:
-              "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/297257252_2000354983482748_4171238219446568382_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UcwTrmREPb4AX8k-fwF&_nc_oc=AQkbhvqaNpIj_CIemgpqaNlkMzHxP7nQjNp5dPMoorA4E2IZvV3Ax2vCyxj-g-dL3_n-Px1vR3lVChzley4njgrm&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfASrqhsuD9OeK5sG-iKP-OYZxzsRbonaXQDXhFx3cQvhg&oe=653122E0",
+              "https://img.freepik.com/premium-photo/sms-text-audio-message-working-with-cell-phone-sending-email-digital-newsletter-manage-relationship-social-network-like-comment-share-media-functional-chat-chatting-mobile_887181-824.jpg",
             name: "Tin nổi bật",
           }}
         />

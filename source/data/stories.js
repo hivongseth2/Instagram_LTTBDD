@@ -3,23 +3,23 @@ export default [
     user: {
       id: "1",
       imageUri:
-        "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/372809666_2284177928433784_4435342299495343359_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=65Qk583wG8QAX-V9TiI&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDoRiR6QTVrae_PemrvrXQMzx6_9PfX2nhu8gOOH3I-Yw&oe=65303BE9",
+        "https://static-images.vnncdn.net/files/publish/2022/9/3/bien-vo-cuc-thai-binh-340.jpg",
       name: "Nguyễn Thành Luân",
     },
     stories: [
       {
         imageUri:
-          "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/297257252_2000354983482748_4171238219446568382_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UcwTrmREPb4AX8k-fwF&_nc_oc=AQkbhvqaNpIj_CIemgpqaNlkMzHxP7nQjNp5dPMoorA4E2IZvV3Ax2vCyxj-g-dL3_n-Px1vR3lVChzley4njgrm&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfASrqhsuD9OeK5sG-iKP-OYZxzsRbonaXQDXhFx3cQvhg&oe=653122E0",
+          "https://i.pinimg.com/736x/eb/58/cc/eb58cc5cfecde2911c1bd9bb8df69ce7.jpg",
         postedTime: "25 m",
       },
       {
         imageUri:
-          "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/325778174_1786865425029763_7187971411853967691_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=6x-rlHr5FAcAX-UyvtA&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDgcyLu1CjZn1TPK4RHgrYCNprfBjxUspmhp_a9-h01Eg&oe=652FBAA5",
+          "https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2021/01/agora-best-picture-nature-696x871.jpg?fit=700%2C20000&quality=95&ssl=1",
         postedTime: "25 m",
       },
       {
         imageUri:
-          "https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/50301987_1030089597175963_6607534085105516544_n.jpg?stp=dst-jpg_s1080x2048&_nc_cat=104&ccb=1-7&_nc_sid=836058&_nc_ohc=BHitvxcRiZgAX_sgPNp&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfC9dq1Kwk3P84gXMpWfmkDc0ekHIc9Q0r4wnubLi1d4sQ&oe=65532ED2",
+          "https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-40.jpg",
         postedTime: "25 m",
       },
     ],

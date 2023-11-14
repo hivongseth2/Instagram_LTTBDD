@@ -199,10 +199,10 @@ const CameraScreen = () => {
               source={require("../../../assets/gai.png")}
               style={{
                 position: "relative",
-                width: 350,
-                height: 350,
-                top: -30,
-                left: 40,
+                width: 200,
+                height: 200,
+                top: 0,
+                left: 30,
               }}
             ></Image>
           </Animated.View>

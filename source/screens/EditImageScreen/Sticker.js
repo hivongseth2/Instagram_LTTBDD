@@ -10,6 +10,8 @@ import {
 } from "@shopify/react-native-skia";
 import HackSticker from "./Stickers/HackSticker";
 import HelloSticker from "./Stickers/HelloSticker";
+import HiSticker from "./Stickers/HiSticker";
+import AllSticker from "./Stickers/AllSticker";
 
 export default function Sticker({ closeSticker }) {
   const width = 200;
@@ -29,11 +31,15 @@ export default function Sticker({ closeSticker }) {
             closeSticker();
           }}
         >
-          <AntDesign name="closecircleo" size={30} color="white" />
+          <AntDesign
+            name="closecircleo"
+            size={30}
+            color="white"
+            style={{ position: "absolute", top: 20 }}
+          />
         </TouchableOpacity>
       </View>
-      <HackSticker></HackSticker>
-      <HelloSticker></HelloSticker>
+      <AllSticker></AllSticker>
     </View>
   );
 }
