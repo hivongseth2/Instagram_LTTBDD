@@ -42,7 +42,6 @@ const App = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
-<<<<<<< HEAD
       {isLoggedIn ? (
           <Router />
         ) : (
@@ -64,9 +63,6 @@ const App = () => {
         
       </Stack.Navigator>
       )}
-=======
-      <Router />
->>>>>>> 8df6dd6716575d352d2b945f7686a640c02b6fe6
     </NavigationContainer>
     // <Comment></Comment>
     // <Comments></Comments>
