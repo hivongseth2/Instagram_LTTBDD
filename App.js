@@ -29,10 +29,11 @@ import "react-native-gesture-handler";
 import React from "react";
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-
+import Comment from "./source/components/Comment/Comment";
 // import { withAuthenticator } from "aws-amplify-react-native";
 
 import Router from "./source/router";
+import Comments from "./source/components/Comment/Index";
 
 const App = () => {
   return (
@@ -40,6 +41,8 @@ const App = () => {
       <StatusBar barStyle="dark-content" />
       <Router />
     </NavigationContainer>
+    // <Comment></Comment>
+    // <Comments></Comments>
   );
 };
 
