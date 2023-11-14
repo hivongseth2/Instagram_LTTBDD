@@ -6,18 +6,32 @@ import ProfileInfo from "../../components/Profile/ProfileInfo";
 import Stories from "../../components/ListStories";
 import Story from "../../components/PreviewStory";
 import TabProfile from "../../components/TabProfile";
+import { useState } from "react";
+import { useEffect } from "react";
 // import Stories from "../../data/stories";
 // import { SafeAreaView } from "react-native-web";
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const ProfileScreen = () => {
-  const data = {
-    name: "Nguyễn Thành Luân",
-    post: 0,
-    followers: 54,
-    following: 114,
-    avatar:
-      "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/372809666_2284177928433784_4435342299495343359_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=65Qk583wG8QAX-V9TiI&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDoRiR6QTVrae_PemrvrXQMzx6_9PfX2nhu8gOOH3I-Yw&oe=65303BE9",
-  };
+  const [data, setData] = useState({});
+
+  useEffect(async()=>{
+    console.log("Set data ok");
+    try {
+      // Retrieve the data from AsyncStorage using the key
+      const userData = await AsyncStorage.getItem('userData');
+      
+      if (userData !== null) {
+        setData(JSON.parse(userData));
+        console.log("Data: " + JSON.parse(userData));
+      } 
+    } catch (error) {
+      // Error retrieving data
+      console.error('Error retrieving user data:', error);
+    }
+  }, [])
+
   const handleEditProfile = () => {};
 
   const handleShareProfile = () => {};
@@ -35,7 +49,7 @@ const ProfileScreen = () => {
           story={{
             id: 2,
             image:
-              "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/297257252_2000354983482748_4171238219446568382_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=UcwTrmREPb4AX8k-fwF&_nc_oc=AQkbhvqaNpIj_CIemgpqaNlkMzHxP7nQjNp5dPMoorA4E2IZvV3Ax2vCyxj-g-dL3_n-Px1vR3lVChzley4njgrm&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfASrqhsuD9OeK5sG-iKP-OYZxzsRbonaXQDXhFx3cQvhg&oe=653122E0",
+              "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/401637272_817090823758302_7225156762376365319_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeERbnf0cu7RajXyIVpAlxjXQa1mzcpndW1BrWbNymd1bXyBOkUdYxN1DJPJMKqNmt8D5F9YRWu6gXs38brHUXvv&_nc_ohc=hZZ_UHAVtlQAX_pT2Hw&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBlxmKZwFyRqtw-HpObKZbXyVnV02dpplSPvbIAPwDDEw&oe=6557A7A5",
             name: "Tin nổi bật",
           }}
         />
