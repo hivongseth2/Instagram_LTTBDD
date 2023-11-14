@@ -19,95 +19,8 @@ import {
   ImageBackground,
   Text,
 } from "react-native";
-
-const shaders = Shaders.create({
-  grayscale: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform sampler2D t;
-      void main() {
-        vec4 c = texture2D(t, uv);
-        float g = dot(c.rgb, vec3(0.299, 0.587, 0.114));
-        gl_FragColor = vec4(vec3(g), c.a);
-      }
-    `,
-  },
-
-  sepia: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform sampler2D t;
-      void main() {
-        vec4 color = texture2D(t, uv);
-        float r = color.r * .393 + color.g * .769 + color.b * .189;
-        float g = color.r * .349 + color.g * .686 + color.b * .168;
-        float b = color.r * .272 + color.g * .534 + color.b * .131;
-        gl_FragColor = vec4(r, g, b, 1.0);
-      }
-    `,
-  },
-
-  brightness: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform sampler2D t;
-      uniform float brightness;
-      void main() {
-        vec4 c = texture2D(t, uv);
-        gl_FragColor = vec4((c.rgb + vec3(brightness)), c.a);
-      }
-    `,
-  },
-
-  saturation: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform sampler2D t;
-      uniform float saturation;
-      void main() {
-        vec4 color = texture2D(t, uv);
-        float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
-        gl_FragColor = vec4(mix(vec3(gray), color.rgb, saturation), color.a);
-      }
-    `,
-  },
-  contrast: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform sampler2D t;
-      uniform float contrast;
-      void main() {
-        vec4 color = texture2D(t, uv);
-        gl_FragColor = vec4(((color.rgb - vec3(0.5)) * contrast + vec3(0.5)), color.a);
-      }
-    `,
-  },
-  hueRotation: {
-    frag: GLSL`
-      precision highp float;
-      varying vec2 uv;
-      uniform sampler2D t;
-      uniform float hue;
-      void main() {
-        vec4 color = texture2D(t, uv);
-        float angle = hue * 3.14159265 / 180.0;
-        mat3 rotMat = mat3(
-          cos(angle), sin(angle), 0,
-          -sin(angle), cos(angle), 0,
-          0, 0, 1
-        );
-        vec3 k = vec3(0.57735, 0.57735, 0.57735);
-        float len = length(color.rgb - k);
-        gl_FragColor = vec4(k + rotMat * (color.rgb - k), color.a);
-      }
-    `,
-  },
-});
+import Filter from "./Filter";
+import ImageFilter from "./ImageFilter";
 
 const PhotoPreview = ({
   photo,
@@ -119,6 +32,7 @@ const PhotoPreview = ({
 }) => {
   let viewShotRef = useRef();
   const [image, setImage] = useState(null);
+  const [save, setSave] = useState(false);
   const [filter, setFilter] = useState(null);
   useEffect(() => {
     // Gọi capture ngay sau khi nội dung đã render xong
@@ -133,102 +47,9 @@ const PhotoPreview = ({
             width: 1080,
           });
         });
-      }, 1000);
+      }, 700);
     }
-  }, [filter]); // Khi filter thay đổi, chụp lại ảnh
-  const renderImageWithFilter = (selectedFilter) => {
-    switch (selectedFilter) {
-      case 1: // Grayscale
-        return (
-          <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            {console.log("pick", image)}
-            <Node shader={shaders.grayscale} uniforms={{ t: image }} />
-          </Surface>
-        );
-      case 2: // Sepia
-        return (
-          <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            {console.log("photo", image)}
-
-            <Node shader={shaders.sepia} uniforms={{ t: image }} />
-          </Surface>
-        );
-      case 3: // Brightness
-        return (
-          <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            <Node
-              shader={shaders.brightness}
-              uniforms={{ t: image, brightness: 0.2 }}
-            />
-          </Surface>
-        );
-      case 4: // Saturtion
-        return (
-          <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            <Node
-              shader={shaders.saturation}
-              uniforms={{ t: image, saturation: 0.3 }}
-            />
-          </Surface>
-        );
-      case 5: // Contract
-        return (
-          <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            <Node
-              shader={shaders.contrast}
-              uniforms={{ t: image, contrast: 0.3 }}
-            />
-          </Surface>
-        );
-
-      case 6: // HUE
-        return (
-          <Surface style={[styles.preview, { height: "100%", width: "100%" }]}>
-            <Node
-              shader={shaders.hueRotation}
-              uniforms={{ t: image, hue: 10 }}
-            />
-          </Surface>
-        );
-      default:
-        return (
-          <ViewShot
-            style={[styles.preview, { height: "100%", width: "100%" }]}
-            options={{
-              format: "jpg",
-              quality: 0.9,
-            }}
-            ref={viewShotRef}
-          >
-            <ImageBackground
-              collapsable={false}
-              source={{ uri: photo.uri }}
-              style={[{ height: "100%", width: "100%" }]}
-            >
-              <Image
-                source={{ uri: photoFilter }}
-                style={[{ height: "100%", width: "100%" }]}
-              />
-            </ImageBackground>
-          </ViewShot>
-
-          // <ViewShot style={[styles.preview, { height: "100%", width: "100%" }]}>
-          //   <Image
-          //     source={{ uri: image }}
-          //     style={[{ height: "100%", width: "100%" }]}
-          //   />
-          // </ViewShot>
-        );
-    }
-  };
-  const filters = [
-    { name: "Grayscale" },
-    { name: "Sepia" },
-    { name: "Brightness" },
-    { name: "Saturation" },
-    { name: "Contrast" },
-    { name: "Hue Rotation" },
-  ];
+  }, []); // Khi filter thay đổi, chụp lại ảnh
 
   if (!photo) {
     return null;
@@ -238,22 +59,32 @@ const PhotoPreview = ({
     setFilter(selectedFilter);
   };
 
+  const savePhotoWithFiter = async () => {
+    try {
+      const uri = await viewShotRef.current.capture();
+      const newImage = {
+        base64: null,
+        height: 1920,
+        uri: uri,
+        width: 1080,
+      };
+      setImage(newImage);
+      savePhoto(newImage);
+    } catch (error) {
+      console.error("Lỗi khi chụp và lưu ảnh:", error);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      {renderImageWithFilter(filter)}
-
-      <View
-        style={[
-          styles.container,
-          {
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-          },
-        ]}
-      >
+      <ImageFilter
+        viewShotRef={viewShotRef}
+        image={image}
+        filter={filter}
+        photo={photo}
+        photoFilter={photoFilter}
+      />
+      <View style={styles.containerPlus}>
         <View style={[styles.hContainer, { marginBottom: "130%" }]}>
           <Pressable
             onPress={() => {
@@ -266,7 +97,12 @@ const PhotoPreview = ({
           <View>
             {hasMediaLibPermission && (
               <View style={[styles.hContainer, { paddingHorizontal: 10 }]}>
-                <Pressable style={{ paddingRight: 30 }} onPress={savePhoto}>
+                <Pressable
+                  style={{ paddingRight: 30 }}
+                  onPress={() => {
+                    savePhotoWithFiter();
+                  }}
+                >
                   <MaterialIcons name="save-alt" size={24} color="black" />
                 </Pressable>
                 <Pressable onPress={sharePic}>
@@ -276,45 +112,7 @@ const PhotoPreview = ({
             )}
           </View>
         </View>
-        <View style={[styles.hContainer, { justifyContent: "center" }]}>
-          <Pressable
-            style={[
-              styles.filterItem,
-              filter === 0 ? { borderColor: "white" } : null,
-            ]}
-            onPress={() => applyFilter(0)}
-          >
-            <Feather
-              name="x"
-              size={35}
-              color={filter === 0 ? "white" : "black"}
-            />
-          </Pressable>
-
-          <FlatList
-            data={filters}
-            keyExtractor={(item) => item.name}
-            horizontal
-            contentContainerStyle={styles.filters}
-            renderItem={({ item, index }) => (
-              <Pressable
-                style={[
-                  styles.filterItem,
-                  filter === index + 1 ? { borderColor: "white" } : null,
-                ]}
-                onPress={() => {
-                  applyFilter(index + 1), console.log(item.name);
-                }}
-              >
-                <MaterialIcons
-                  name={`filter-${index + 1}`}
-                  size={24}
-                  color={filter === index + 1 ? "white" : "black"}
-                />
-              </Pressable>
-            )}
-          />
-        </View>
+        <Filter filter={filter} applyFilter={applyFilter} />
       </View>
     </SafeAreaView>
   );
@@ -346,6 +144,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignContent: "center",
     alignItems: "center",
+  },
+
+  containerPlus: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    flex: 1,
   },
 });
 

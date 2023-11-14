@@ -1,21 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView,
-  Button,
-  Image,
-  ImageBackground,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, Text, Modal, Image, Pressable } from "react-native";
 import { manipulateAsync, FlipType, SaveFormat } from "expo-image-manipulator";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
 import { useIsFocused } from "@react-navigation/native";
 import Animated, {
   useSharedValue,
@@ -27,9 +17,11 @@ import * as MediaLibrary from "expo-media-library";
 import { TouchableOpacity } from "react-native";
 // import { ViewShot } from "react-native-view-shot";
 import ViewShot from "react-native-view-shot";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import * as FaceDetector from "expo-face-detector";
 import PhotoPreview from "../EditImageScreen";
+import Sticker from "../EditImageScreen/Sticker";
 const CameraScreen = () => {
   const isFocused = useIsFocused(); // 1 phien chi 1 apply 1 cam, dung useFocus xu ly
   const [hasCameraPermission, setHasCameraPermission] = useState(); // quyen cam
@@ -51,6 +43,13 @@ const CameraScreen = () => {
     x: 0,
     y: 0,
   });
+
+  // open stickerModal
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   // SUA FILTER O DAY
 
@@ -121,19 +120,9 @@ const CameraScreen = () => {
       base64: false,
       exif: false,
     };
-    // captureScreen({
-    //   format: "jpg",
-    //   quality: 0.8,
-    // }).then(
-    //   (uri) => setPhoto({ uri: uri }),
-    //   (error) => console.error("Oops, snapshot failed", error)
-    // );
+
     let photoCamera = await cameraRef.current.takePictureAsync(options);
-    // let newPhoto = await viewShotRef.current.capture();
-    // console.log(newPhoto);
-    // setPhoto({ uri: newPhoto });
-    // _rotate90andFlip(newPhoto);
-    // setPhoto(newPhoto);
+
     try {
       const photoFilter = await viewShotRef.current.capture();
       _rotate90andFlip(photoCamera, photoFilter);
@@ -141,9 +130,6 @@ const CameraScreen = () => {
       const photoFilter = null;
       _rotate90andFlip(photoCamera, photoFilter);
     }
-    // console.log(photoCamera);
-    // setPhoto({ uri: photoCamera.uri });
-    // setPhotoFilter({ uri: photoFilter });
   };
 
   if (photo) {
@@ -152,8 +138,8 @@ const CameraScreen = () => {
         setPhoto(undefined);
       });
     };
-    let savePhoto = () => {
-      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
+    let savePhoto = (image) => {
+      MediaLibrary.saveToLibraryAsync(image.uri).then(() => {
         setPhoto(undefined);
       });
     };
@@ -213,10 +199,10 @@ const CameraScreen = () => {
               source={require("../../../assets/gai.png")}
               style={{
                 position: "relative",
-                width: 350,
-                height: 350,
-                top: -30,
-                left: 40,
+                width: 200,
+                height: 200,
+                top: 0,
+                left: 30,
               }}
             ></Image>
           </Animated.View>
@@ -256,7 +242,13 @@ const CameraScreen = () => {
                   color="white"
                 />
               </TouchableOpacity>
-              <SimpleLineIcons name="settings" size={30} color="white" />
+              <Pressable onPress={toggleDrawer}>
+                <MaterialCommunityIcons
+                  name="sticker-emoji"
+                  size={30}
+                  color="white"
+                />
+              </Pressable>
             </View>
             <View style={styles.leftContainer}>
               <Ionicons
@@ -292,7 +284,6 @@ const CameraScreen = () => {
                 style={[
                   styles.buttonContainer,
                   {
-                    // borderColor: filter ? "white" : "none",
                     backgroundColor: filter ? "white" : "#ccc",
                     borderWidth: filter ? 5 : 0,
                   },
@@ -308,6 +299,17 @@ const CameraScreen = () => {
           </Camera>
         </ViewShot>
       )}
+
+      <Modal
+        visible={isDrawerOpen}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => {
+          setIsDrawerOpen(!isDrawerOpen);
+        }}
+      >
+        <Sticker closeSticker={() => toggleDrawer()}></Sticker>
+      </Modal>
     </View>
   );
 };

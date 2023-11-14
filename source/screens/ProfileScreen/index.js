@@ -49,7 +49,11 @@ const ProfileScreen = () => {
           story={{
             id: 2,
             image:
+<<<<<<< HEAD
               "https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/401637272_817090823758302_7225156762376365319_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeERbnf0cu7RajXyIVpAlxjXQa1mzcpndW1BrWbNymd1bXyBOkUdYxN1DJPJMKqNmt8D5F9YRWu6gXs38brHUXvv&_nc_ohc=hZZ_UHAVtlQAX_pT2Hw&_nc_ht=scontent.fsgn2-8.fna&oh=00_AfBlxmKZwFyRqtw-HpObKZbXyVnV02dpplSPvbIAPwDDEw&oe=6557A7A5",
+=======
+              "https://img.freepik.com/premium-photo/sms-text-audio-message-working-with-cell-phone-sending-email-digital-newsletter-manage-relationship-social-network-like-comment-share-media-functional-chat-chatting-mobile_887181-824.jpg",
+>>>>>>> 8df6dd6716575d352d2b945f7686a640c02b6fe6
             name: "Tin nổi bật",
           }}
         />

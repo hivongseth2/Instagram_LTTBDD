@@ -18,7 +18,7 @@ export default function PostsProfile() {
     {
       id: 1,
       image:
-        "https://instagram.fsgn2-7.fna.fbcdn.net/v/t51.2885-15/393106059_295562386678988_3432316042676425775_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEwODAuc2RyIn0&_nc_ht=instagram.fsgn2-7.fna.fbcdn.net&_nc_cat=108&_nc_ohc=eD9ESO7xUVkAX9LcQF2&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzIxNDEzNjIwODYxMTY2MjA9Nw%3D%3D.2-ccb7-5&oh=00_AfCl1-mVh2LhaEUn7CUW_BPs7XxcIooqTDK6FcnybWQZNw&oe=652EA0EF&_nc_sid=ee9879",
+        "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
       likes: 100,
       comment: 20,
       captions:
@@ -29,7 +29,7 @@ export default function PostsProfile() {
     {
       id: 2,
       image:
-        "https://instagram.fsgn2-6.fna.fbcdn.net/v/t51.2885-15/391489017_1060580958693047_9030472726282319199_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi43MzZ4NzM2LnNkciJ9&_nc_ht=instagram.fsgn2-6.fna.fbcdn.net&_nc_cat=111&_nc_ohc=dXL_BATQDT8AX8z6gf4&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzIxNDEzNTcwNTYzMDgwNTgyNzYwNw%3D%3D.2-ccb7-5&oh=00_AfB3mUuFdh4hsqNCxC4PSpbUnUb9oIWQk32n7WPx4RyuHg&oe=652F350E&_nc_sid=ee9879",
+        "https://tosuphoto.com/wp-content/uploads/2020/08/nhiep-anh-cho-nguoi-moi-bat-dau-cover.jpg",
       likes: 100,
       comment: 20,
       share: 10,
@@ -39,7 +39,7 @@ export default function PostsProfile() {
     {
       id: 3,
       image:
-        "https://instagram.fsgn2-6.fna.fbcdn.net/v/t51.2885-15/391112615_678071367593314_6963889023805257173_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDU2eDEwNTYuc2RyIn0&_nc_ht=instagram.fsgn2-6.fna.fbcdn.net&_nc_cat=110&_nc_ohc=MiOIUDfTgZQAX-mng3_&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzIxNDEzNDQ0ODM3MTUxNzMxNzYwNw%3D%3D.2-ccb7-5&oh=00_AfDTAPvLBjMivWqZdM4knw_PnUJMiVeZzjzMlKtHMtizLw&oe=652F1402&_nc_sid=ee9879",
+        "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/4/29/903917/Can-Canh-Su-Tu-Trang-04.jpg",
       likes: 100,
       comment: 20,
       share: 10,
@@ -49,7 +49,7 @@ export default function PostsProfile() {
     {
       id: 4,
       image:
-        "https://instagram.fsgn2-9.fna.fbcdn.net/v/t51.2885-15/392725837_726681905954523_4221889637597803079_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi42NDB4NjQwLnNkciJ9&_nc_ht=instagram.fsgn2-9.fna.fbcdn.net&_nc_cat=103&_nc_ohc=vvh4NsXGPKwAX8bwApX&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzIxNDEzMTkwNTMyMjk3OTQ4NzYwNw%3D%3D.2-ccb7-5&oh=00_AfBZyW89ly8azEkzEjmWffQB8X55rXSTSE5cZidOCjlpew&oe=652F91F3&_nc_sid=ee9879",
+        "https://i.pinimg.com/736x/eb/58/cc/eb58cc5cfecde2911c1bd9bb8df69ce7.jpg",
       likes: 100,
       comment: 20,
       share: 10,
@@ -60,7 +60,7 @@ export default function PostsProfile() {
     {
       id: 5,
       image:
-        "https://instagram.fsgn2-9.fna.fbcdn.net/v/t51.2885-15/392725837_726681905954523_4221889637597803079_n.heic?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi42NDB4NjQwLnNkciJ9&_nc_ht=instagram.fsgn2-9.fna.fbcdn.net&_nc_cat=103&_nc_ohc=vvh4NsXGPKwAX8bwApX&edm=ACWDqb8BAAAA&ccb=7-5&ig_cache_key=MzIxNDEzMTkwNTMyMjk3OTQ4NzYwNw%3D%3D.2-ccb7-5&oh=00_AfBZyW89ly8azEkzEjmWffQB8X55rXSTSE5cZidOCjlpew&oe=652F91F3&_nc_sid=ee9879",
+        "https://leplateau.edu.vn/wp-content/uploads/2023/10/hinh-anh-cute-1.jpg",
       likes: 100,
       comment: 20,
       share: 10,
@@ -81,7 +81,7 @@ export default function PostsProfile() {
           onPress={() => {
             const user = {
               image:
-                "https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-6/372809666_2284177928433784_4435342299495343359_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=65Qk583wG8QAX-V9TiI&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfDoRiR6QTVrae_PemrvrXQMzx6_9PfX2nhu8gOOH3I-Yw&oe=65303BE9",
+                "https://i.pinimg.com/236x/13/e2/3d/13e23d20a53514a9fc872a3d8861f504.jpg",
               name: "Nguyễn Thành Luân",
             };
             const post = {
