@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({}) => {
   const [data, setData] = useState({});
 
   useEffect(async()=>{

@@ -13,12 +13,12 @@ import { AntDesign } from "@expo/vector-icons";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 
-export default function Comments({ closeComment }) {
+export default function Comments({ closeComment, comments }) {
   const width = 200;
-
+  console.log("Comments: " + comments);
   const [data, setData] = useState(CommentData);
   useEffect(() => {
-    console.log(data);
+    setData(comments);
   }, []);
   return (
     <View style={styles.container}>
