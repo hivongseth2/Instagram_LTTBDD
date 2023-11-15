@@ -53,8 +53,10 @@ export default function CreatePost({ navigation }) {
   };
 
   const goNext = () => {
-    // Thực hiện điều gì đó khi nhấn nút "Next"
-    // Ví dụ: chuyển đến màn hình tiếp theo
+    navigation.navigate("CreatePost2", {
+      image: image,
+      imageDimensions: imageDimensions,
+    });
   };
 
   useEffect(() => {

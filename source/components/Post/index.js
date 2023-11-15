@@ -6,9 +6,7 @@ import Body from "./components/Body";
 import Footer from "./components/Footer";
 const Post = ({ post, route }) => {
   const postTemp = route && route.params ? route.params.post : post;
-
-  console.log("Image: " + postTemp.user.image);
-
+  console.log(postTemp);
   return (
     <View>
       <Header imageUri={postTemp.user.image} name={postTemp.user.name} />

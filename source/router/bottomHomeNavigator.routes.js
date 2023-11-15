@@ -58,19 +58,23 @@ const BottomHomeNavigator = () => (
     <Tab.Screen
       name="Discovery"
       component={DiscoveryScreen}
-      options={{ title: "" }}
+      options={{ headerShown: false, title: "" }}
     />
-    <Tab.Screen name="Post" component={CameraScreen} options={{ title: "" }} />
+    <Tab.Screen
+      name="Post"
+      component={CameraScreen}
+      options={{ headerShown: false, title: "" }}
+    />
 
     <Tab.Screen
       name="Notifications"
       component={NotificationsScreen}
-      options={{ title: "" }}
+      options={{ title: "Thông báo" }}
     />
     <Tab.Screen
       name="Profile"
       component={ProfileScreen}
-      options={{ title: "" }}
+      options={{ headerShown: false, title: "" }}
     />
   </Tab.Navigator>
 );

@@ -7,6 +7,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 import StoryCreate from "./StoryCreate";
 import CreatePost from "./CreatePost";
+import CreatePostNav from "./CreatePostNav";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,8 +27,8 @@ export default function index() {
       }}
     >
       <Tab.Screen
-        name="PostCreate"
-        component={CreatePost}
+        name="PostCreateNav"
+        component={CreatePostNav}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons

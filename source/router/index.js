@@ -28,7 +28,7 @@ const Router = () => (
     <RootStack.Screen
       name="PostUser"
       component={Post}
-      options={{ title: "", unmountOnBlur: true }}
+      options={{ headerShown: false }}
     />
   </RootStack.Navigator>
 );

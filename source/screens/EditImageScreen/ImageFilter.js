@@ -168,12 +168,14 @@ export default function ImageFilter({
         return (
           <ImageBackground
             source={{ uri: photo.uri }}
-            style={[{ height: "100%", width: "100%" }]}
+            style={{ height: "100%", width: "100%" }}
           >
-            <Image
-              source={{ uri: photoFilter }}
-              style={[{ height: "100%", width: "100%" }]}
-            />
+            {photoFilter !== null && (
+              <Image
+                source={{ uri: photoFilter }}
+                style={{ height: "100%", width: "100%" }}
+              />
+            )}
           </ImageBackground>
         );
     }

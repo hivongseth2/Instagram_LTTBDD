@@ -17,8 +17,9 @@ export default function PostsProfile() {
   const data = [
     {
       id: 1,
-      image:
+      images: [
         "https://baoangiang.com.vn/image/fckeditor/upload/2020/20201205/images/nhung-buc-anh-dep-nhat-nam-2020-theo-do-agora-binh-chon.jpg",
+      ],
       likes: 100,
       comment: 20,
       captions:
@@ -28,8 +29,10 @@ export default function PostsProfile() {
     },
     {
       id: 2,
-      image:
+      images: [
         "https://tosuphoto.com/wp-content/uploads/2020/08/nhiep-anh-cho-nguoi-moi-bat-dau-cover.jpg",
+      ],
+
       likes: 100,
       comment: 20,
       share: 10,
@@ -38,8 +41,9 @@ export default function PostsProfile() {
     },
     {
       id: 3,
-      image:
+      images: [
         "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/4/29/903917/Can-Canh-Su-Tu-Trang-04.jpg",
+      ],
       likes: 100,
       comment: 20,
       share: 10,
@@ -48,8 +52,9 @@ export default function PostsProfile() {
     },
     {
       id: 4,
-      image:
+      images: [
         "https://i.pinimg.com/736x/eb/58/cc/eb58cc5cfecde2911c1bd9bb8df69ce7.jpg",
+      ],
       likes: 100,
       comment: 20,
       share: 10,
@@ -59,8 +64,9 @@ export default function PostsProfile() {
     },
     {
       id: 5,
-      image:
+      images: [
         "https://leplateau.edu.vn/wp-content/uploads/2023/10/hinh-anh-cute-1.jpg",
+      ],
       likes: 100,
       comment: 20,
       share: 10,
@@ -93,7 +99,7 @@ export default function PostsProfile() {
           }}
           style={[styles.imageContainer, { width: itemSize, height: itemSize }]}
         >
-          <Image source={{ uri: item.image }} style={styles.image} />
+          <Image source={{ uri: item.images[0] }} style={styles.image} />
         </TouchableOpacity>
       )}
     />
