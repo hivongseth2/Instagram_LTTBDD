@@ -16,6 +16,7 @@ const Post = ({ post, route }) => {
         caption={postTemp.captions}
         postedAt={postTemp.createdAt}
         comments={postTemp.comments}
+        postId={postTemp.id}
       />
     </View>
   );

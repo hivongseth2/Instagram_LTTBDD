@@ -8,6 +8,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { BASE_API_URL } from '@env';
 
 export default function CreatePost3({ route, navigation }) {
   const [image, setImage] = useState(route.params.image);
@@ -31,7 +34,10 @@ export default function CreatePost3({ route, navigation }) {
           </Pressable>
           <Text style={styles.header}>Bài viết mới</Text>
         </View>
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={async() => {
+          const userData = JSON.parse(await AsyncStorage.get('userData'));
+
+        }}>
           <Text style={styles.share}>Chia sẻ</Text>
         </Pressable>
       </View>

@@ -4,13 +4,14 @@ import { FontAwesome } from "@expo/vector-icons";
 
 const Comment = ({ item }) => {
   const [like, setLike] = useState(false);
+  // console.log("Item in comment: " + item.user);
   return (
     <View style={styles.commentContainer}>
       <View style={{ flexDirection: "row" }}>
         <Image
           style={styles.avatar}
           source={{
-            uri: item.imageUri,
+            uri: item.user?.image,
           }}
         />
         <View style={styles.vContainer}>

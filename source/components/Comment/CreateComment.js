@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TextInput, Button, StyleSheet, Image } from "react-native";
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const userData = JSON.parse(await AsyncStorage.getItem('userData'));
 
 const CreateComment = ({ onSubmit }) => {
   const [comment, setComment] = useState("");
@@ -10,6 +14,7 @@ const CreateComment = ({ onSubmit }) => {
       return;
     }
 
+    console.log("Comment: " + comment);
     onSubmit(comment);
     setComment("");
   };
@@ -19,7 +24,7 @@ const CreateComment = ({ onSubmit }) => {
       <Image
         style={styles.avatar}
         source={{
-          uri: "https://statusneo.com/wp-content/uploads/2023/02/MicrosoftTeams-image551ad57e01403f080a9df51975ac40b6efba82553c323a742b42b1c71c1e45f1.jpg",
+          uri: userData?.image,
         }}
       />
       <View style={styles.inputContainer}>
