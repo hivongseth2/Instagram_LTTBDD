@@ -75,6 +75,21 @@ const PhotoPreview = ({
     }
   };
 
+  const createStory = async () => {
+    try {
+      const uri = await viewShotRef.current.capture();
+      const newImage = {
+        base64: null,
+        height: 1920,
+        uri: uri,
+        width: 1080,
+      };
+      setImage(newImage);
+    } catch (error) {
+      console.error("Lỗi khi tạo story", error);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageFilter
@@ -87,26 +102,40 @@ const PhotoPreview = ({
       <View style={styles.containerPlus}>
         <View style={[styles.hContainer, { marginBottom: "130%" }]}>
           <Pressable
+            style={{ marginTop: 15 }}
             onPress={() => {
               setPhoto(undefined);
             }}
           >
-            <Ionicons name="chevron-back-sharp" size={24} color="black" />
+            <Ionicons name="chevron-back-sharp" size={30} color="white" />
           </Pressable>
 
           <View>
             {hasMediaLibPermission && (
-              <View style={[styles.hContainer, { paddingHorizontal: 10 }]}>
+              <View
+                style={[
+                  styles.hContainer,
+                  {
+                    paddingHorizontal: 10,
+                    alignContent: "center",
+                    alignItems: "center",
+                  },
+                ]}
+              >
                 <Pressable
                   style={{ paddingRight: 30 }}
                   onPress={() => {
                     savePhotoWithFiter();
                   }}
                 >
-                  <MaterialIcons name="save-alt" size={24} color="black" />
+                  <MaterialIcons name="save-alt" size={30} color="white" />
                 </Pressable>
                 <Pressable onPress={sharePic}>
-                  <FontAwesome name="share" size={24} color="black" />
+                  <FontAwesome name="share" size={30} color="white" />
+                </Pressable>
+
+                <Pressable style={styles.containerNext} onPress={createStory}>
+                  <Text style={styles.next}>Tiếp</Text>
                 </Pressable>
               </View>
             )}
@@ -132,12 +161,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  next: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "white",
+  },
 
+  containerNext: {
+    padding: 10,
+    textAlign: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#00A9FF",
+    marginLeft: 30,
+    borderRadius: 5,
+  },
   filterItem: {
     width: 50,
     height: 50,
     marginRight: 10,
-
     borderRadius: 100,
     borderColor: "black",
     borderWidth: 5,
