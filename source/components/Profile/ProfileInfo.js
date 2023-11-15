@@ -6,10 +6,10 @@ const ProfileInfo = ({ data, onEditProfile, onShareProfile }) => {
   return (
     <View style={styles.container}>
       <View style={styles.horizontalContainer}>
-        <Image style={styles.avatar} source={{ uri: data.avatar }} />
+        <Image style={styles.avatar} source={{ uri: data.image }} />
         <View style={styles.verticalContainer}>
           <Text style={[styles.numberText, { paddingRight: 10 }]}>
-            {data.post}
+            0
           </Text>
           <Text style={[styles.infoText, { width: "100%" }]} numberOfLines={1}>
             Bài viết
@@ -17,7 +17,7 @@ const ProfileInfo = ({ data, onEditProfile, onShareProfile }) => {
         </View>
 
         <View style={styles.verticalContainer}>
-          <Text style={styles.numberText}>{data.followers}</Text>
+          <Text style={styles.numberText}>{data.follower}</Text>
           <Text style={styles.infoText} numberOfLines={1}>
             Người theo dõi
           </Text>
