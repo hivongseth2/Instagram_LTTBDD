@@ -20,6 +20,8 @@ import ProfilePicture from "../../components/ProfilePicture";
 import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import { BASE_API_URL } from '@env';
+
 const StoryScreen = () => {
   const [stories, setStories] = useState([]);
   const [activeStoryIndex, setActiveStoryIndex] = useState(null);
@@ -34,21 +36,19 @@ const StoryScreen = () => {
     console.log(activeStory);
   }, []);
 
-  // const fetchStories = async () => {
-  //   try {
-  //     const storiesData = await API.graphql(graphqlOperation(listStorys));
-  //     console.log(storiesData);
-  //     setStories(storiesData.data.listStorys.items);
-  //   } catch (e) {
-  //     console.log('error fetching stories');
-  //     console.log(e)
-  //   }
-  // }
-
   const fetchStories = async () => {
+    const userData = JSON.parse(await AsyncStorage.get('userData'));
     try {
-      setStories(storiesData);
-      console.log(storiesData);
+      const response = await fetch(`${BASE_API_URL}/story/${userData.id}`);
+
+      if (response.status === 200) {
+        const result = await response.json();
+
+        setStories(result);
+        console.log(storiesData);
+      } else {
+        console.error('Login failed');
+      }
     } catch (e) {
       console.log("error fetching stories");
       console.log(e);
