@@ -17,6 +17,7 @@
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/native-stack": "^6.9.14",
     "@react-navigation/stack": "^6.3.18",
+    "@shopify/react-native-skia": "0.1.196",
     "@tu-nguyen-tech/react-native-effect-instagram": "^1.0.5",
     "amazon-cognito-identity-js": "^4.3.4",
     "aws-amplify": "^3.0.24",
@@ -51,7 +52,7 @@
     "react-native-web": "~0.19.6",
     "react-native-worklets-core": "^0.2.2",
     "react-webcam": "^7.1.1",
-    "@shopify/react-native-skia": "0.1.196"
+    "expo-image-picker": "~14.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
