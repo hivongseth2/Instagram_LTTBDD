@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   container: {},
   name: {
     textAlign: "center",
+    width: 80,
   },
 });
 

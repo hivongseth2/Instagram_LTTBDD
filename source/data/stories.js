@@ -5,6 +5,7 @@ export default [
       imageUri:
         "https://static-images.vnncdn.net/files/publish/2022/9/3/bien-vo-cuc-thai-binh-340.jpg",
       name: "Nguyễn Thành Luân",
+      stateStory: 1,
     },
     stories: [
       {
@@ -30,6 +31,7 @@ export default [
       imageUri:
         "https://scontent.fsgn2-5.fna.fbcdn.net/v/t1.6435-9/50301987_1030089597175963_6607534085105516544_n.jpg?stp=dst-jpg_s1080x2048&_nc_cat=104&ccb=1-7&_nc_sid=836058&_nc_ohc=BHitvxcRiZgAX_sgPNp&_nc_ht=scontent.fsgn2-5.fna&oh=00_AfC9dq1Kwk3P84gXMpWfmkDc0ekHIc9Q0r4wnubLi1d4sQ&oe=65532ED2",
       name: "Show Văn Time",
+      stateStory: 1,
     },
     stories: [
       {
@@ -55,6 +57,7 @@ export default [
       imageUri:
         "https://kenh14cdn.com/thumb_w/660/2020/5/28/0-1590653959375414280410.jpg",
       name: "Nguyễn Thị Xinh Không ?",
+      stateStory: 0,
     },
     stories: [
       {
@@ -69,7 +72,8 @@ export default [
       id: "4",
       imageUri:
         "https://capnuoclaocai.com.vn/wp-content/uploads/2023/06/hinh-anh-gai-xinh-de-thuong.jpg",
-      name: "Lê Thị Đẹp",
+      name: "Trọng Bê Đê",
+      stateStory: 0,
     },
     stories: [
       {
@@ -85,6 +89,7 @@ export default [
       imageUri:
         "https://antimatter.vn/wp-content/uploads/2022/11/hinh-anh-gai-xinh-trung-quoc.jpg",
       name: "Lê Trần Xinh Chưa",
+      stateStory: 1,
     },
     stories: [
       {
@@ -100,6 +105,7 @@ export default [
       imageUri:
         "https://haycafe.vn/wp-content/uploads/2022/02/Hinh-gai-xinh-de-thuong-keo-toc.jpg",
       name: "Nguyễn Chưa Có Bồ",
+      stateStory: 0,
     },
     stories: [
       {

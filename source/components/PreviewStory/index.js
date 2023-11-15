@@ -7,21 +7,28 @@ import styles from "./styles";
 import ProfilePicture from "../ProfilePicture";
 
 const Story = (props) => {
-  const {
-    story: { id, image, name },
-  } = props;
+  const data = props;
+
+  // cấu trúc truy cập user : data.story.user.imageUri
+  //cấu trúc truy cập story:  data.story.stories[0].imageUri;
   // const { id, image, name } = props;
 
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate("Story", { userId: id });
+    navigation.navigate("Story", { storyData: data });
+    console.log(data);
   };
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <ProfilePicture uri={image} />
-      <Text style={styles.name}>{name}</Text>
+      <ProfilePicture
+        uri={data.story.user.imageUri}
+        storyState={data.story.user.stateStory}
+      />
+      <Text numberOfLines={1} style={styles.name}>
+        {data.story.user.name}
+      </Text>
     </TouchableOpacity>
   );
 };

@@ -20,15 +20,19 @@ import ProfilePicture from "../../components/ProfilePicture";
 import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import { BASE_API_URL } from '@env';
+import { BASE_API_URL } from "@env";
 
-const StoryScreen = () => {
+const StoryScreen = ({ route }) => {
+  // cấu trúc truy cập user :  route.params.storyData.story.user.imageUri
+  //cấu trúc truy cập story:  route.params.storyData.story.stories[0].imageUri;
+  const user = route.params.storyData.story.user;
+  const story = route.params.storyData.story.stories;
+
   const [stories, setStories] = useState([]);
   const [activeStoryIndex, setActiveStoryIndex] = useState(null);
   const [indexUser, setIndexUser] = useState(0);
   // const [activeStory, setActiveStory] = useState(stories[0]);
 
-  const route = useRoute();
   const navigation = useNavigation();
   useEffect(() => {
     fetchStories();
@@ -37,18 +41,45 @@ const StoryScreen = () => {
   }, []);
 
   const fetchStories = async () => {
-    const userData = JSON.parse(await AsyncStorage.get('userData'));
+    // const userData = JSON.parse(await AsyncStorage.get("userData"));
     try {
-      const response = await fetch(`${BASE_API_URL}/story/${userData.id}`);
+      // const response = await fetch(`${BASE_API_URL}/story/${userData.id}`);
 
-      if (response.status === 200) {
-        const result = await response.json();
+      // if (response.status === 200) {
+      //   const result = await response.json();
 
-        setStories(result);
-        console.log(storiesData);
-      } else {
-        console.error('Login failed');
-      }
+      //   setStories(result);
+      //   console.log(storiesData);
+      // } else {
+      //   console.error('Login failed');
+      // }
+
+      // BẮT ĐẦU XỬ LÚ, LÚ VC
+      // Xử lý sort các story đã xem , tương tự như trên nhưng rút gọn bằng speard hehe, ghê không
+      // Nhớ sau khi xem xong 1 cái thì post lên báo là đã xem rồi ỏ cái stateStory
+      const userStoriesSort = [
+        ...storiesData.filter((item) => item.user.stateStory !== 0),
+        ...storiesData.filter((item) => item.user.stateStory === 0),
+      ];
+      // Xử lý kết thúc
+
+      //Xử lý khi click vào chọn đúng story đó để xem trước
+
+      // lọc ra cái đã click
+      const userStories = userStoriesSort.filter(
+        (item) => item.user.id === user.id
+      );
+
+      // // Lọc ra stories khác
+      const otherStories = userStoriesSort.filter(
+        (item) => item.user.id !== user.id
+      );
+      // ghép nó lại
+      const sortedStoriesData = userStories.concat(otherStories);
+      // xử lý kết thúc
+
+      // setStories(userStoriesSort);
+      setStories(sortedStoriesData);
     } catch (e) {
       console.log("error fetching stories");
       console.log(e);
