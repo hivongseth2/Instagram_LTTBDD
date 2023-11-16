@@ -6,9 +6,7 @@ import {
   FlatList,
 } from "react-native";
 
-// import CommentData from "../../data/CommentData";
 import { useEffect, useState } from "react";
-// export default function Comments({ closeComment }) {
 import { AntDesign } from "@expo/vector-icons";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
@@ -19,10 +17,8 @@ import { BASE_API_URL } from "@env";
 
 export default function Comments({
   closeComment,
-  //   comments,
+
   postId,
-  //   reloadCmts,
-  //   flag,
 }) {
   const width = 200;
   const [comments, setComments] = useState({});
@@ -95,31 +91,31 @@ export default function Comments({
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		width: '100%',
-		height: '96%',
-		backgroundColor: '#FFFF',
-		borderRadius: 20,
+  container: {
+    flex: 1,
+    width: "100%",
+    height: "96%",
+    backgroundColor: "#FFFF",
+    borderRadius: 20,
 
-		justifyContent: 'center',
-		alignItems: 'center',
-		position: 'absolute',
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
 
-		bottom: 0,
-	},
+    bottom: 0,
+  },
 
-	CommentContainer: {
-		justifyContent: 'flex-start',
-		marginLeft: 30,
-		marginTop: 30,
-		height: '100%',
-		alignSelf: 'flex-start',
-	},
-	hContainer: {
-		flexDirection: 'row',
-		width: '100%',
-		// justifyContent: "center",
-		alignItems: 'flex-end',
-	},
+  CommentContainer: {
+    justifyContent: "flex-start",
+    marginLeft: 30,
+    marginTop: 30,
+    height: "100%",
+    alignSelf: "flex-start",
+  },
+  hContainer: {
+    flexDirection: "row",
+    width: "100%",
+    // justifyContent: "center",
+    alignItems: "flex-end",
+  },
 });

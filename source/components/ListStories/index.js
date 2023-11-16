@@ -5,33 +5,45 @@ import { API, graphqlOperation } from "aws-amplify";
 import Story from "../PreviewStory";
 import storiesData from "../../data/stories.js";
 import styles from "./style";
+import { BASE_API_URL } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stories = () => {
   const [stories, setStories] = useState([]);
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = JSON.parse(await AsyncStorage.getItem("userData"));
+        setUserData(user);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     fetchStories();
   }, []);
 
-  //   const fetchStories = async () => {
-  //     try {
-  //       const storiesData = await API.graphql(graphqlOperation(listStorys));
-  //       setStories(storiesData.data.listStorys.items);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
-
   const fetchStories = async () => {
-    const userStoriesSort = [
-      ...storiesData.filter((item) => item.user.stateStory !== 0),
-      ...storiesData.filter((item) => item.user.stateStory === 0),
-    ];
+    try {
+      const response = await fetch(`${BASE_API_URL}/story/${userData.id}`);
+      const data = await response.json();
 
-    // Tí lấy cái id của user rồi so sánh vs mảng stories coi trùng id thì đưa nó lên đầu
+      const tempStories = data;
+      const userStoriesSort = [
+        ...tempStories.filter((item) => item.user.stateStory !== 0),
+        ...tempStories.filter((item) => item.user.stateStory === 0),
+      ];
 
-    console.log(userStoriesSort);
-    setStories(userStoriesSort);
+      setStories(userStoriesSort);
+    } catch (error) {
+      console.error("Error fetching storis:", error);
+    }
   };
 
   //id, image, name

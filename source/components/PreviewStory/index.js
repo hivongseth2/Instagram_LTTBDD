@@ -24,7 +24,7 @@ const Story = (props) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <ProfilePicture
-        uri={data.story.user.imageUri}
+        uri={data.story.user.image}
         storyState={data.story.user.stateStory}
       />
       <Text numberOfLines={1} style={styles.name}>

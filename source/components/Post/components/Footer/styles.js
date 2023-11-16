@@ -1,30 +1,31 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     margin: 5,
   },
   iconsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 5,
   },
   leftIcons: {
-    flexDirection: 'row',
+    flexDirection: "row",
     width: 120,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   likes: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     margin: 3,
   },
   caption: {
     margin: 3,
   },
   postedAt: {
-    color: '#8c8c8c',
+    color: "#8c8c8c",
     margin: 3,
-  }
+    fontSize: 12,
+  },
 });
 
 export default styles;

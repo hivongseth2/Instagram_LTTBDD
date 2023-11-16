@@ -5,6 +5,7 @@ import FontistoIcon from "react-native-vector-icons/Fontisto";
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
 import FAIcon from "react-native-vector-icons/FontAwesome";
 import { BASE_API_URL } from "@env";
+import { format } from "date-fns";
 
 import styles from "./styles";
 import Comments from "../../../Comment/Index";
@@ -84,7 +85,9 @@ const Footer = ({
 
       <Text style={styles.likes}>{likesCount} Likes</Text>
       <Text style={styles.caption}>{caption}</Text>
-      <Text style={styles.postedAt}>{postedAt}</Text>
+      <Text style={styles.postedAt}>
+        {format(new Date(postedAt), "HH:mm:ss dd/MM/yyyy")}
+      </Text>
       <Modal
         visible={isDrawerOpen}
         animationType="slide"
