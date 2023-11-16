@@ -1,7 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, TextInput, Button, StyleSheet, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CreateComment = ({ onSubmit }) => {
+  const [userData, setUserData] = useState({});
+  useEffect(() => {
+    AsyncStorage.getItem("userData")
+      .then((data) => {
+        setUserData(JSON.parse(data));
+        // Now you can use userData as needed
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
   const [comment, setComment] = useState("");
 
   const handleSubmit = () => {
@@ -19,7 +33,7 @@ const CreateComment = ({ onSubmit }) => {
       <Image
         style={styles.avatar}
         source={{
-          uri: "https://statusneo.com/wp-content/uploads/2023/02/MicrosoftTeams-image551ad57e01403f080a9df51975ac40b6efba82553c323a742b42b1c71c1e45f1.jpg",
+          uri: userData?.image,
         }}
       />
       <View style={styles.inputContainer}>

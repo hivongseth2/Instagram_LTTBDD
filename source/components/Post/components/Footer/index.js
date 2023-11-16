@@ -8,7 +8,13 @@ import FAIcon from "react-native-vector-icons/FontAwesome";
 import styles from "./styles";
 import Comments from "../../../Comment/Index";
 
-const Footer = ({ likesCount: likesCountProp, caption, postedAt, comments }) => {
+const Footer = ({
+  likesCount: likesCountProp,
+  caption,
+  postedAt,
+  comments,
+  postId,
+}) => {
   const [isLiked, setIsLike] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -65,7 +71,11 @@ const Footer = ({ likesCount: likesCountProp, caption, postedAt, comments }) => 
           setIsDrawerOpen(!isDrawerOpen);
         }}
       >
-        <Comments closeComment={() => toggleDrawer()} comments={comments}></Comments>
+        <Comments
+          closeComment={() => toggleDrawer()}
+          comments={comments}
+          postId={postId}
+        ></Comments>
       </Modal>
     </View>
   );

@@ -13,13 +13,50 @@ import { AntDesign } from "@expo/vector-icons";
 import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 
-export default function Comments({ closeComment, comments }) {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { BASE_API_URL } from "@env";
+
+export default function Comments({ closeComment, comments, postId }) {
   const width = 200;
+
   console.log("Comments: " + comments);
+
   const [data, setData] = useState(CommentData);
-  useEffect(() => {
-    setData(comments);
-  }, []);
+
+  useEffect(
+    () => {
+      setData(comments);
+    },
+    [],
+    [data]
+  );
+
+  const onSubmit = async (comment) => {
+    const userData = JSON.parse(await AsyncStorage.getItem("userData"));
+
+    const response = await fetch(`${BASE_API_URL}/post/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId,
+        userId: userData.id,
+        content: comment,
+      }),
+    });
+
+    if (response.status === 200) {
+      const dataNew = await response.json();
+
+      setData(dataNew);
+    } else {
+      console.log("Add comment failed: " + response.status);
+    }
+    // console.log("On submit oke");
+  };
+
   return (
     <View style={styles.container}>
       <View
@@ -47,7 +84,7 @@ export default function Comments({ closeComment, comments }) {
           data={data}
           renderItem={({ item }) => <Comment item={item}></Comment>}
         ></FlatList>
-        <CreateComment />
+        <CreateComment onSubmit={onSubmit} />
       </View>
     </View>
   );

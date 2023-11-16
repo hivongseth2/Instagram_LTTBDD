@@ -10,7 +10,7 @@ const Comment = ({ item }) => {
         <Image
           style={styles.avatar}
           source={{
-            uri: item.imageUri,
+            uri: item.user?.image,
           }}
         />
         <View style={styles.vContainer}>
