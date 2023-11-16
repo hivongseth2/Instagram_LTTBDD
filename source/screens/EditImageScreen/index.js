@@ -82,10 +82,6 @@ const PhotoPreview = ({
 				`${BASE_API_URL}/story/${userData.id}`,
 				{
 					method: 'POST',
-					headers: {
-						// Sử dụng 'multipart/form-data' cho việc gửi FormData
-						'Content-Type': 'multipart/form-data',
-					},
 					body: formData,
 				}
 			);
