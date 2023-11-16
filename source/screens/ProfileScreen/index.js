@@ -22,7 +22,7 @@ import { Entypo } from "@expo/vector-icons";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const ProfileScreen = ({ dataUserOther }) => {
+const ProfileScreen = ({ dataUserOther, navigation }) => {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -95,7 +95,18 @@ const ProfileScreen = ({ dataUserOther }) => {
         ]}
       >
         <Text style={{ fontSize: 18, fontWeight: "bold" }}>{data.name}</Text>
-        <Entypo name="log-out" size={24} color="black" />
+        <Pressable onPress={async()=>{
+          try {
+            await AsyncStorage.removeItem("userData");
+            console.log('Dữ liệu đã được xóa thành công!');
+
+            navigation.navigate("Home")
+          } catch (error) {
+            console.error('Lỗi khi xóa dữ liệu:', error);
+          }
+        }}>
+          <Entypo name="log-out" size={24} color="black" />
+        </Pressable>
       </View>
       <ProfileInfo
         data={data}

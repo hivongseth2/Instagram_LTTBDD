@@ -15,7 +15,7 @@ const Post = ({ post, route }) => {
         likesCount={postTemp.likes}
         caption={postTemp.captions}
         postedAt={postTemp.createdAt}
-        comments={postTemp.comments}
+        // comments={postTemp.comments}
         postId={postTemp.id}
       />
     </View>
