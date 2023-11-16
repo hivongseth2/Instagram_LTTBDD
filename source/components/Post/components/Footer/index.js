@@ -4,6 +4,7 @@ import ADIcon from "react-native-vector-icons/AntDesign";
 import FontistoIcon from "react-native-vector-icons/Fontisto";
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
 import FAIcon from "react-native-vector-icons/FontAwesome";
+import { BASE_API_URL } from "@env";
 
 import styles from "./styles";
 import Comments from "../../../Comment/Index";
@@ -12,9 +13,10 @@ const Footer = ({
   likesCount: likesCountProp,
   caption,
   postedAt,
-  comments,
+  // comments,
   postId,
 }) => {
+  // const [comments, setComments] = useState({});
   const [isLiked, setIsLike] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -31,6 +33,26 @@ const Footer = ({
   useEffect(() => {
     setLikesCount(likesCountProp);
   }, []);
+
+  // const fetchPosts = async () => {
+  //   try {
+  //     const url = `${BASE_API_URL}/post/${postId}`;
+  //     const response = await fetch(url);
+
+  //     if (!response.ok) {
+  //       throw new Error(`Network response was not ok: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     setComments(data.comments);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, [flag]);
 
   return (
     <View style={styles.container}>
@@ -73,8 +95,10 @@ const Footer = ({
       >
         <Comments
           closeComment={() => toggleDrawer()}
-          comments={comments}
+          // comments={comments}
           postId={postId}
+          // reloadCmts={reloadCmts}
+          // flag={flag}
         ></Comments>
       </Modal>
     </View>

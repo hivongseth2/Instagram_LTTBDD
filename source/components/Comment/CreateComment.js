@@ -1,22 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { View, TextInput, Button, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BASE_API_URL } from "@env";
 
-const CreateComment = ({ onSubmit }) => {
+const CreateComment = ({ postId, reloadCmts }) => {
   const [userData, setUserData] = useState({});
-  useEffect(() => {
-    AsyncStorage.getItem("userData")
-      .then((data) => {
-        setUserData(JSON.parse(data));
-        // Now you can use userData as needed
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
-
   const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user = JSON.parse(await AsyncStorage.getItem("userData"));
+        setUserData(user);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const onSubmit = async (comment) => {
+    const response = await fetch(`${BASE_API_URL}/post/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId,
+        userId: userData.id,
+        content: comment,
+      }),
+    });
+
+    if (response.status === 200) {
+      try {
+        await reloadCmts();
+        // await reload();
+      } catch (error) {
+        // Handle errors if needed
+        console.error("Error during reloading:", error);
+      }
+    } else {
+    }
+  };
 
   const handleSubmit = () => {
     if (comment.trim() === "") {
@@ -41,7 +67,7 @@ const CreateComment = ({ onSubmit }) => {
           style={styles.input}
           placeholder="Add a comment..."
           value={comment}
-          onChangeText={setComment}
+          onChangeText={(e) => setComment(e)}
         />
       </View>
       <Button title="Post" onPress={handleSubmit} />

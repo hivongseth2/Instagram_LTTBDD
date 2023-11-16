@@ -6,7 +6,7 @@ import {
   FlatList,
 } from "react-native";
 
-import CommentData from "../../data/CommentData";
+// import CommentData from "../../data/CommentData";
 import { useEffect, useState } from "react";
 // export default function Comments({ closeComment }) {
 import { AntDesign } from "@expo/vector-icons";
@@ -17,45 +17,45 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { BASE_API_URL } from "@env";
 
-export default function Comments({ closeComment, comments, postId }) {
+export default function Comments({
+  closeComment,
+  //   comments,
+  postId,
+  //   reloadCmts,
+  //   flag,
+}) {
   const width = 200;
+  const [comments, setComments] = useState({});
+  const [flag, setFlag] = useState(false);
 
-  console.log("Comments: " + comments);
-
-  const [data, setData] = useState(CommentData);
-
-  useEffect(
-    () => {
-      setData(comments);
-    },
-    [],
-    [data]
-  );
-
-  const onSubmit = async (comment) => {
-    const userData = JSON.parse(await AsyncStorage.getItem("userData"));
-
-    const response = await fetch(`${BASE_API_URL}/post/comment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        postId,
-        userId: userData.id,
-        content: comment,
-      }),
-    });
-
-    if (response.status === 200) {
-      const dataNew = await response.json();
-
-      setData(dataNew);
-    } else {
-      console.log("Add comment failed: " + response.status);
-    }
-    // console.log("On submit oke");
+  const [data, setData] = useState({});
+  const reloadCmts = () => {
+    setFlag(!flag);
   };
+
+  const fetchPosts = async () => {
+    try {
+      const url = `${BASE_API_URL}/post/${postId}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status}`);
+      }
+
+      const data = await response.json();
+      //   setComments(data.comments);
+      setData(data.comments);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, [flag]);
+  //   useEffect(() => {
+  //     setData(comments);
+  //   }, [data, flag]);
 
   return (
     <View style={styles.container}>
@@ -84,7 +84,11 @@ export default function Comments({ closeComment, comments, postId }) {
           data={data}
           renderItem={({ item }) => <Comment item={item}></Comment>}
         ></FlatList>
-        <CreateComment onSubmit={onSubmit} />
+        <CreateComment
+          postId={postId}
+          reloadCmts={reloadCmts}
+          comments={comments}
+        />
       </View>
     </View>
   );
