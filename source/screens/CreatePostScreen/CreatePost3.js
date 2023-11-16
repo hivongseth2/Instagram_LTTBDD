@@ -12,9 +12,28 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { BASE_API_URL } from '@env';
 
-const userData = JSON.parse(await AsyncStorage.getItem('userData'));
+// const userData = JSON.parse(await AsyncStorage.getItem('userData'));
 
 export default function CreatePost3({ route, navigation }) {
+
+
+	const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const storedUserData = await AsyncStorage.getItem('userData');
+        if (storedUserData) {
+          const parsedUserData = JSON.parse(storedUserData);
+          setUserData(parsedUserData);
+        }
+      } catch (error) {
+        console.error('Lỗi khi lấy dữ liệu:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 	// const [image, setImage] = useState(route.params.image);
 	const image = route.params.image;
 	const [caption, setCaption] = useState(''); // Thêm state cho caption
