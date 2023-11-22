@@ -53,7 +53,7 @@ const PhotoPreview = ({
             width: 1080,
           });
         });
-      }, 700);
+      }, 800);
     }
   }, []); // Khi filter thay đổi, chụp lại ảnh
 
@@ -127,30 +127,25 @@ const PhotoPreview = ({
         quality: 0.8,
       });
 
-      const newImage = {
-        base64: null,
-        height: 1920,
-        uri: uri,
-        width: 1080,
-      };
+      console.log(uri);
 
       const formData = new FormData();
-      formData.append("image", {
-        uri: newImage.uri,
-        type: "image/jpeg", // Adjust the type according to your image format
-        name: "photo.jpg",
-      });
+      formData.append("image", uri);
 
       const response = await fetch(`${BASE_API_URL}/story/${userData.id}`, {
         method: "POST",
         body: formData,
+        headers: {
+          //   Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       if (response.ok) {
-        setImage(newImage);
-        savePhoto(newImage);
+        setImage(uri);
+        savePhoto(uri);
       } else {
-        console.log("Create story failed: " + response.status);
+        console.log("Create story failedd: " + response.status);
       }
     } catch (error) {
       console.error("Lỗi khi chụp và lưu ảnh:", error);

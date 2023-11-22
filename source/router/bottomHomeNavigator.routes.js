@@ -12,6 +12,7 @@ import DiscoveryScreen from "../screens/DiscoveryScreen";
 import CameraScreen from "../screens/CreatePostScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import ReelsScreen from "../screens/Reels";
 // import
 
 const Tab = createBottomTabNavigator();
@@ -40,7 +41,7 @@ const BottomHomeNavigator = () => (
         if (route.name === "Post") {
           return <Feather name="plus-square" size={size} color={color} />;
         }
-        if (route.name === "Notifications") {
+        if (route.name === "Reels") {
           return <AntDesign name="hearto" size={size} color={color} />;
         }
         if (route.name === "Profile") {
@@ -67,9 +68,9 @@ const BottomHomeNavigator = () => (
     />
 
     <Tab.Screen
-      name="Notifications"
-      component={NotificationsScreen}
-      options={{ title: "Thông báo" }}
+      name="Reels"
+      component={ReelsScreen}
+      options={{ title: "Reels", headerShown: false }}
     />
     <Tab.Screen
       name="Profile"

@@ -5,6 +5,7 @@ import bottomHomeNavigator from "./bottomHomeNavigator.routes";
 import Post from "../components/Post";
 
 import StoryScreen from "../screens/StoryScreen";
+import NotificationsScreen from "../screens/NotificationsScreen";
 
 const RootStack = createStackNavigator();
 
@@ -22,6 +23,15 @@ const Router = () => (
       component={StoryScreen}
       options={{
         headerShown: false,
+      }}
+    />
+
+    <RootStack.Screen
+      name="Noti"
+      component={NotificationsScreen}
+      options={{
+        headerShown: true,
+        headerTitle: "Thông báo",
       }}
     />
 

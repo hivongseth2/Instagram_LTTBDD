@@ -12,7 +12,7 @@ import logo from "../assets/images/logo.png";
 
 const HomeStack = createStackNavigator();
 
-const HomeRoutes = () => (
+const HomeRoutes = ({ navigation }) => (
   <HomeStack.Navigator>
     <HomeStack.Screen
       name="Home"
@@ -46,7 +46,14 @@ const HomeRoutes = () => (
               justifyContent: "space-between",
             }}
           >
-            <AntDesign name="hearto" size={24} color="black" />
+            <AntDesign
+              name="hearto"
+              size={24}
+              color="black"
+              onPress={() => {
+                navigation.navigate("Noti");
+              }}
+            />
             <AntDesign name="message1" size={24} color="black" />
           </View>
         ),
