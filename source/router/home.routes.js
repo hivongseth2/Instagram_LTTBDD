@@ -54,7 +54,9 @@ const HomeRoutes = ({ navigation }) => (
                 navigation.navigate("Noti");
               }}
             />
-            <AntDesign name="message1" size={24} color="black" />
+            <AntDesign name="message1" size={24} color="black" onPress={() => {
+                navigation.navigate("UserListChat");
+              }}/>
           </View>
         ),
       }}
