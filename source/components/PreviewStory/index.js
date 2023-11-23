@@ -8,7 +8,10 @@ import ProfilePicture from "../ProfilePicture";
 
 const Story = (props) => {
   const data = props;
-  console.log(data);
+  if (data.story.stories.length === 0) {
+    return;
+  }
+  console.log(data, "O PREVIEW==========================");
 
   // cấu trúc truy cập user : data.story.user.imageUri
   //cấu trúc truy cập story:  data.story.stories[0].imageUri;

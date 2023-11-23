@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import {
   View,
   Text,
@@ -10,11 +12,9 @@ import {
   Dimensions,
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-// import { API, graphqlOperation } from "aws-amplify";
 
-// import { listStorys } from "../../graphql/queries";
 import styles from "./styles";
-import storiesData from "../../data/stories";
+// import storiesData from "../../data/stories";
 // import ProfilePicture from "../../components/profilePicture";
 import ProfilePicture from "../../components/ProfilePicture";
 import Feather from "react-native-vector-icons/Feather";
@@ -35,51 +35,35 @@ const StoryScreen = ({ route }) => {
 
   const navigation = useNavigation();
   useEffect(() => {
-    fetchStories();
+    fetchData();
     setActiveStoryIndex(0);
-    console.log(activeStory);
   }, []);
 
-  const fetchStories = async () => {
-    // const userData = JSON.parse(await AsyncStorage.get("userData"));
+  const fetchData = async () => {
+    const userData = JSON.parse(await AsyncStorage.getItem("userData"));
     try {
-      // const response = await fetch(`${BASE_API_URL}/story/${userData.id}`);
+      const response = await fetch(`${BASE_API_URL}/story/${userData.id}`);
 
-      // if (response.status === 200) {
-      //   const result = await response.json();
+      if (response.status === 200) {
+        const result = await response.json();
+        const userStoriesSort = result.filter((item) => {
+          return (
+            item.stories.length > 0 &&
+            (item.user.stateStory !== 0 || item.user.stateStory === 0)
+          );
+        });
 
-      //   setStories(result);
-      //   console.log(storiesData);
-      // } else {
-      //   console.error('Login failed');
-      // }
-
-      // BẮT ĐẦU XỬ LÚ, LÚ VC
-      // Xử lý sort các story đã xem , tương tự như trên nhưng rút gọn bằng speard hehe, ghê không
-      // Nhớ sau khi xem xong 1 cái thì post lên báo là đã xem rồi ỏ cái stateStory
-      const userStoriesSort = [
-        ...storiesData.filter((item) => item.user.stateStory !== 0),
-        ...storiesData.filter((item) => item.user.stateStory === 0),
-      ];
-      // Xử lý kết thúc
-
-      //Xử lý khi click vào chọn đúng story đó để xem trước
-
-      // lọc ra cái đã click
-      const userStories = userStoriesSort.filter(
-        (item) => item.user.id === user.id
-      );
-
-      // // Lọc ra stories khác
-      const otherStories = userStoriesSort.filter(
-        (item) => item.user.id !== user.id
-      );
-      // ghép nó lại
-      const sortedStoriesData = userStories.concat(otherStories);
-      // xử lý kết thúc
-
-      // setStories(userStoriesSort);
-      setStories(sortedStoriesData);
+        const userStories = userStoriesSort.filter(
+          (item) => item.user.id === user.id
+        );
+        const otherStories = userStoriesSort.filter(
+          (item) => item.user.id !== user.id
+        );
+        const sortedStoriesData = userStories.concat(otherStories);
+        setStories(sortedStoriesData);
+      } else {
+        console.error("Login failed");
+      }
     } catch (e) {
       console.log("error fetching stories");
       console.log(e);
@@ -104,16 +88,12 @@ const StoryScreen = ({ route }) => {
       return;
     }
     setActiveStoryIndex(activeStoryIndex + 1);
-    console.log(stories.length);
-    console.log("index ", indexUser);
   };
 
   const handlePrevStory = () => {
-    console.log("aaaaaaaaaaa");
     if (activeStoryIndex > 0) {
       setActiveStoryIndex(activeStoryIndex - 1);
     } else if (indexUser > 0) {
-      // Nếu bạn đang ở activeStoryIndex đầu tiên và có người dùng trước đó, chuyển đến người dùng trước đó
       setIndexUser(indexUser - 1);
       setActiveStoryIndex(stories[indexUser - 1].stories.length - 1);
     }
@@ -145,14 +125,20 @@ const StoryScreen = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <TouchableWithoutFeedback onPress={handlePress}>
         <ImageBackground
-          source={{ uri: activeStory.stories[activeStoryIndex].imageUri }}
+          source={{
+            uri: activeStory.stories[activeStoryIndex]
+              ? activeStory.stories[activeStoryIndex].imageUri
+              : "",
+          }}
           style={styles.image}
         >
           <View style={styles.userInfo}>
             <ProfilePicture uri={activeStory.user.imageUri} size={38} />
             <Text style={styles.userName}>{activeStory.user.name}</Text>
             <Text style={styles.postedTime}>
-              {activeStory.stories[activeStoryIndex].postedTime}
+              {activeStory.stories[activeStoryIndex]
+                ? activeStory.stories[activeStoryIndex].postedTime
+                : ""}
             </Text>
           </View>
           <View style={styles.bottomContainer}>

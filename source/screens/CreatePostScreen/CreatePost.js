@@ -34,6 +34,9 @@ export default function CreatePost({ navigation }) {
     }
   };
 
+  useEffect(() => {
+    console.log(image, "------------------");
+  }, [image]);
   const getImageSize = (uri) => {
     return new Promise((resolve, reject) => {
       Image.getSize(

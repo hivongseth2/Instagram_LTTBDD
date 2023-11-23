@@ -17,6 +17,8 @@ import { BASE_API_URL } from "@env";
 export default function CreatePost3({ route, navigation }) {
   const [userData, setUserData] = useState(null);
 
+  console.log("alo", BASE_API_URL);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,7 +39,7 @@ export default function CreatePost3({ route, navigation }) {
   const [caption, setCaption] = useState(""); // Thêm state cho caption
 
   useEffect(() => {
-    console.log("Image screen3: " + image);
+    console.log("Image screen3: " + image.uri);
   }, [image]);
 
   return (

@@ -19,6 +19,8 @@ const CreateComment = ({ postId, reloadCmts }) => {
 
     fetchData();
   }, []);
+
+  console.log(BASE_API_URL);
   const onSubmit = async (comment) => {
     const response = await fetch(`${BASE_API_URL}/post/comment`, {
       method: "POST",

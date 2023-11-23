@@ -23,9 +23,9 @@ import Filter from "./Filter";
 import ImageFilter from "./ImageFilter";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as MediaLibrary from "expo-media-library";
 
 import { BASE_API_URL } from "@env";
-
 // const userData = JSON.parse(await AsyncStorage.getItem('userData'));
 
 const PhotoPreview = ({
@@ -35,6 +35,7 @@ const PhotoPreview = ({
   sharePic,
   photoFilter,
   savePhoto,
+  navigation,
 }) => {
   let viewShotRef = useRef();
   const [image, setImage] = useState(null);
@@ -83,52 +84,12 @@ const PhotoPreview = ({
     setFilter(selectedFilter);
   };
 
-  //   const createStory = async () => {
-  //     try {
-  //       //   const uri = await viewShotRef.current.capture();
-
-  //       captureScreen({
-  //         format: "jpg",
-  //         quality: 0.8,
-  //       }).then(
-  //         (uri) => console.log("Image saved to", uri),
-  //         (error) => console.error("Oops, snapshot failed", error)
-  //       );
-  //       const newImage = {
-  //         base64: null,
-  //         height: 1920,
-  //         uri: uri,
-  //         width: 1080,
-  //       };
-
-  //       const formData = new FormData();
-  //       formData.append("image", newImage.uri);
-
-  //       const response = fetch(`${BASE_API_URL}/story/${userData.id}`, {
-  //         method: "POST",
-  //         body: formData,
-  //       });
-
-  //       if (response.status === 200) {
-  //         setImage(newImage);
-  //         savePhoto(newImage);
-  //       } else {
-  //         console.log("Create story failed: " + response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Lỗi khi chụp và lưu ảnh:", error);
-  //     }
-  //   };
-
-  console.log(BASE_API_URL, "----------------------------");
   const createStory = async () => {
     try {
       const uri = await captureScreen({
         format: "jpg",
         quality: 0.8,
       });
-
-      console.log(uri);
 
       const formData = new FormData();
       formData.append("image", {
@@ -149,6 +110,9 @@ const PhotoPreview = ({
       if (response.ok) {
         setImage(uri);
         savePhoto(uri);
+        setTimeout(() => {
+          navigation.navigate("Home");
+        }, 3000);
       } else {
         console.log("Create story failedd: " + response.status);
       }
@@ -167,6 +131,10 @@ const PhotoPreview = ({
         width: 1080,
       };
       setImage(newImage);
+      // savePhoto(uri);
+      console.log(uri);
+      await MediaLibrary.createAssetAsync(uri);
+      // await MediaLibrary.saveToLibraryAsync(asset.uri); // Use asset.uri instead of the entire asset object
     } catch (error) {
       console.error("Lỗi khi tạo story", error);
     }

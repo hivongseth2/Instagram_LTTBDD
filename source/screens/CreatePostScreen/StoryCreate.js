@@ -22,7 +22,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as FaceDetector from "expo-face-detector";
 import PhotoPreview from "../EditImageScreen";
 import Sticker from "../EditImageScreen/Sticker";
-const StoryCreate = () => {
+const StoryCreate = ({ navigation }) => {
   const isFocused = useIsFocused(); // 1 phien chi 1 apply 1 cam, dung useFocus xu ly
   const [hasCameraPermission, setHasCameraPermission] = useState(); // quyen cam
   const [type, setType] = useState(Camera.Constants.Type.front); // camera truoc saau
@@ -140,6 +140,7 @@ const StoryCreate = () => {
       });
     };
     let savePhoto = (image) => {
+      // console.log(image);
       MediaLibrary.saveToLibraryAsync(image.uri).then(() => {
         setPhoto(undefined);
       });
@@ -152,6 +153,7 @@ const StoryCreate = () => {
         sharePic={sharePic}
         photoFilter={photoFilter}
         savePhoto={savePhoto}
+        navigation={navigation}
       />
     );
   }

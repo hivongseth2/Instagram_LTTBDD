@@ -11,7 +11,7 @@ const Login = ({ navigation, route }) => {
   const { handleLogin } = route.params || {};
 
   const handleLoginPress = async () => {
-    console.log(BASE_API_URL + "========================");
+    console.log(BASE_API_URL + "======================o day==");
     try {
       const response = await fetch(`${BASE_API_URL}/user/login`, {
         method: "POST",

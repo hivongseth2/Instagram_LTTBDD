@@ -28,6 +28,7 @@ export default function Comments({
   const reloadCmts = () => {
     setFlag(!flag);
   };
+  console.log(BASE_API_URL);
 
   const fetchPosts = async () => {
     try {

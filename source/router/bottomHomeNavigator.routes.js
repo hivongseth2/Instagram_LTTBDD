@@ -14,6 +14,7 @@ import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ReelsScreen from "../screens/Reels";
 // import
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,7 +43,9 @@ const BottomHomeNavigator = () => (
           return <Feather name="plus-square" size={size} color={color} />;
         }
         if (route.name === "Reels") {
-          return <AntDesign name="hearto" size={size} color={color} />;
+          return (
+            <MaterialIcons name="ondemand-video" size={size} color={color} />
+          );
         }
         if (route.name === "Profile") {
           return <Ionicons name="person-outline" size={size} color={color} />;
