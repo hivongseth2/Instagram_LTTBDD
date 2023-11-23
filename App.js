@@ -9,7 +9,7 @@ import Register from "./source/screens/Auth/Register";
 import Router from "./source/router";
 import { useEffect } from "react";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
@@ -22,31 +22,34 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
-  useEffect(async()=>{
-    try {
-      // Retrieve the data from AsyncStorage using the key
-      const userData = await AsyncStorage.getItem('userData');
-  
-      if (userData !== null) {
-        // Data retrieval successful, userData contains the retrieved data
-        // console.log('Retrieved user data:', userData);
-        // return JSON.parse(userData); // Parse JSON data if needed
-        setIsLoggedIn(true);
-      } 
-    } catch (error) {
-      // Error retrieving data
-      console.error('Error retrieving user data:', error);
-    }
-  }, [], [isLoggedIn])
+  useEffect(
+    async () => {
+      try {
+        // Retrieve the data from AsyncStorage using the key
+        const userData = await AsyncStorage.getItem("userData");
+
+        if (userData !== null) {
+          // Data retrieval successful, userData contains the retrieved data
+          // console.log('Retrieved user data:', userData);
+          // return JSON.parse(userData); // Parse JSON data if needed
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        // Error retrieving data
+        console.error("Error retrieving user data:", error);
+      }
+    },
+    [],
+    [isLoggedIn]
+  );
 
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" />
       {isLoggedIn ? (
-          <Router />
-        ) : (
-      <Stack.Navigator>
-        
+        <Router />
+      ) : (
+        <Stack.Navigator>
           <>
             <Stack.Screen
               name="Login"
@@ -60,8 +63,7 @@ const App = () => {
               options={{ headerShown: false }}
             />
           </>
-        
-      </Stack.Navigator>
+        </Stack.Navigator>
       )}
     </NavigationContainer>
     // <Comment></Comment>

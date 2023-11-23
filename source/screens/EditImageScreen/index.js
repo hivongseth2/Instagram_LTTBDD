@@ -120,6 +120,7 @@ const PhotoPreview = ({
   //     }
   //   };
 
+  console.log(BASE_API_URL, "----------------------------");
   const createStory = async () => {
     try {
       const uri = await captureScreen({
@@ -130,7 +131,11 @@ const PhotoPreview = ({
       console.log(uri);
 
       const formData = new FormData();
-      formData.append("image", uri);
+      formData.append("image", {
+        name: `${Math.random}.jpg`,
+        uri: uri,
+        type: "image/jpg",
+      });
 
       const response = await fetch(`${BASE_API_URL}/story/${userData.id}`, {
         method: "POST",

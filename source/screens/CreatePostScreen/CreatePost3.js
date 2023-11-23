@@ -66,11 +66,19 @@ export default function CreatePost3({ route, navigation }) {
           onPress={async () => {
             var formdata = new FormData();
             // formdata.append('image', image);
-            formdata.append("image", image.uri);
+            formdata.append("image", {
+              name: `${Math.random}.jpg`,
+              uri: image.uri,
+              type: "image/jpg",
+            });
             formdata.append("content", caption);
 
             var requestOptions = {
               method: "POST",
+              headers: {
+                //   Accept: "application/json",
+                "Content-Type": "multipart/form-data",
+              },
               body: formdata,
               redirect: "follow",
             };
